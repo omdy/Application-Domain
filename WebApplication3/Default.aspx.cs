@@ -20,7 +20,7 @@ namespace WebApplication3
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             con.Open();
 
-            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts", con);
+            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.chartofaccounts", con);
             MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adp.Fill(ds);
@@ -44,20 +44,38 @@ namespace WebApplication3
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            /*MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            Response.Redirect("~/Journalize.aspx");
+        }
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Event Log.aspx");
+        }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Testing.aspx");
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             con.Open();
 
-
-
-            String insertS = "INSERT INTO chartofaccounts.chartofaccounts VALUES('" + TextBox2.Text + "','" + TextBox3.Text + "','" + TextBox4.Text + "','" + TextBox5.Text + "','" + TextBox6.Text + "','" + TextBox7.Text + "','" + TextBox8.Text + "','" + TextBox9.Text + "','" + TextBox10.Text + "','" + TextBox11.Text + "','" + TextBox12.Text + "')";
-
-            MySqlCommand cmd = new MySqlCommand(insertS, con);
+            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.accountbalances", con);
             MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-            //INSERT INTO chartofaccounts.chartofaccounts VALUES('Supplies', 'Asset', 'Left', '1000.29', '1003', '125', 'Andy', '01-03-2017', '2', 'Testing', 'Current BS');
-            //" + TextBox2.Text + "','" + TextBox3.Text + "','" + TextBox4.Text + "','" + TextBox5.Text + "','" + TextBox6.Text + "','" + TextBox7.Text + "','" + TextBox8.Text + "','" + TextBox9.Text + "','" + TextBox10.Text + "','" + TextBox11.Text + "','" + TextBox12.Text +"')
+            DataSet ds = new DataSet();
+            adp.Fill(ds);
+
+            GridView2.DataSource = ds;
+            GridView2.DataBind();
+
             cmd.Dispose();
             con.Close();
-            Response.Write("It done.");*/
+        }
+
+        protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
