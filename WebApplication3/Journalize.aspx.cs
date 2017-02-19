@@ -53,8 +53,15 @@ namespace WebApplication3
                 amountPos = dbAdd + amountPos;
                 String abDB = "UPDATE `chartofaccounts`.`accountbalances` SET `Pending+Value` = '" + amountPos + "' WHERE `Account` = '" + TextBox1.Text + "'";
                 MySqlCommand cmd = new MySqlCommand(abDB, con2);
-                
-                cmd.ExecuteNonQuery();
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    Response.Write("You entered in one of the fields wrong.");
+                }
                 cmd.Dispose();
             }
             else
@@ -76,7 +83,16 @@ namespace WebApplication3
 
                 String abDB = "UPDATE `chartofaccounts`.`accountbalances` SET `Pending-Value` = '" + amountNeg + "' WHERE `Account` = '" + TextBox1.Text + "'";
                 MySqlCommand cmd = new MySqlCommand(abDB, con2);
-                cmd.ExecuteNonQuery();
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    Response.Write("You entered in one of the fields wrong.");
+                }
+
                 cmd.Dispose();
             }
 
@@ -99,7 +115,15 @@ namespace WebApplication3
             
             String evDB = "INSERT INTO chartofaccounts.eventlog (Name, Date, Type, Event)VALUES('" + user + "','" + date + "','" + dbType + "','" + dbEvent + "')";
             MySqlCommand cmd2 = new MySqlCommand(evDB, con2);
-            cmd2.ExecuteNonQuery();
+            
+            try
+            {
+                cmd2.ExecuteNonQuery();
+            }
+            catch
+            {
+                Response.Write("You entered in one of the fields wrong for the event log.");
+            }
 
 
             cmd2.Dispose();

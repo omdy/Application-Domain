@@ -32,14 +32,26 @@ namespace WebApplication3
             con.Open();
             String coaDB = "INSERT INTO chartofaccounts.chartofaccounts VALUES('" + TextBox2.Text + "','" + DropDownList1.Text + "','" + DropDownList2.Text + "','" + TextBox6.Text + "','" + TextBox7.Text + "','" + user + "','" + date + "','" + DropDownList3.Text + "','" + TextBox11.Text + "')";
             MySqlCommand cmd = new MySqlCommand(coaDB, con);
-            cmd.ExecuteNonQuery();
 
             String dbType = "Account";
             String dbEvent = "Added " + TextBox2.Text;
-
             String evDB = "INSERT INTO chartofaccounts.eventlog (Name, Date, Type, Event)VALUES('" + user + "','" + date + "','" + dbType + "','" + dbEvent + "')";
             MySqlCommand cmd2 = new MySqlCommand(evDB, con);
-            cmd2.ExecuteNonQuery();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                
+                cmd2.ExecuteNonQuery();
+
+                
+            }
+            catch
+            {
+                Response.Write("You entered in one of the fields wrong.");
+            }
+
+            
 
 
             cmd2.Dispose();
