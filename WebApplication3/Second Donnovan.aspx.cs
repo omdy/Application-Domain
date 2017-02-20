@@ -38,17 +38,23 @@ namespace WebApplication3
             String evDB = "INSERT INTO chartofaccounts.eventlog (Name, Date, Type, Event)VALUES('" + user + "','" + date + "','" + dbType + "','" + dbEvent + "')";
             MySqlCommand cmd2 = new MySqlCommand(evDB, con);
 
+            String abDB = "INSERT INTO `chartofaccounts`.`accountbalances` (`Account`, `Actual Balance`, `Pending+Value`, `Pending-Value`, `PendingCombined`, `Liquidity Order`) VALUES('" + TextBox2.Text + "','0','0','0', '0', '" + TextBox7.Text + "')";
+            MySqlCommand cmd3 = new MySqlCommand(abDB, con);
+
             try
             {
                 cmd.ExecuteNonQuery();
                 
                 cmd2.ExecuteNonQuery();
 
+                cmd3.ExecuteNonQuery();
+
                 
             }
             catch
             {
-                Response.Write("You entered in one of the fields wrong.");
+                //Response.Write("You entered in one of the fields wrong.");
+                Response.Write(abDB);
             }
 
             

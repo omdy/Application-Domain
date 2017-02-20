@@ -20,7 +20,7 @@ namespace WebApplication3
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             con.Open();
 
-            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.chartofaccounts", con);
+            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.chartofaccounts ORDER BY `Liquidity Order`", con);
             MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adp.Fill(ds);
@@ -61,7 +61,7 @@ namespace WebApplication3
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             con.Open();
 
-            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.accountbalances", con);
+            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.accountbalances ORDER BY `Liquidity Order`", con);
             MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adp.Fill(ds);
