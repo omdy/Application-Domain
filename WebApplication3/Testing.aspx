@@ -13,6 +13,7 @@
         <br />
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         <br />
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:chartofaccountsConnectionString %>" ProviderName="<%$ ConnectionStrings:chartofaccountsConnectionString.ProviderName %>" SelectCommand="SELECT [Account Name] AS Account_Name FROM [chartofaccounts] ORDER BY [Liquidity Order]"></asp:SqlDataSource>
         <br />
         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Do the Thing" />
         <br />

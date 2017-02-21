@@ -10,14 +10,32 @@
             width: 100%;
         }
         .auto-style2 {
-            width: 106px;
+            width: 262px;
         }
         .auto-style3 {
-            width: 106px;
+            width: 262px;
             height: 26px;
         }
         .auto-style4 {
             height: 26px;
+        }
+        .auto-style5 {
+            width: 262px;
+            height: 25px;
+        }
+        .auto-style6 {
+            height: 25px;
+        }
+        .auto-style7 {
+            width: 110px;
+        }
+        .auto-style8 {
+            height: 26px;
+            width: 110px;
+        }
+        .auto-style9 {
+            height: 25px;
+            width: 110px;
         }
     </style>
 </head>
@@ -28,20 +46,23 @@
         <table class="auto-style1">
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td class="auto-style7">&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style3">
+                    &nbsp;</td>
+                <td class="auto-style8">
         <asp:Label ID="Label1" runat="server" Text="Account Name"></asp:Label>
                 </td>
                 <td class="auto-style4">
                     <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                 </td>
-                <td class="auto-style4"></td>
             </tr>
             <tr>
                 <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style7">
                     <asp:Label ID="Label2" runat="server" Text="Type"></asp:Label>
                 </td>
                 <td>
@@ -52,10 +73,11 @@
                         <asp:ListItem>Assets</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style3">
+                    &nbsp;</td>
+                <td class="auto-style8">
                     <asp:Label ID="Label3" runat="server" Text="Side"></asp:Label>
                 </td>
                 <td class="auto-style4">
@@ -65,46 +87,51 @@
                         <asp:ListItem>Left</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <td class="auto-style4"></td>
             </tr>
             <tr>
                 <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style7">
                     <asp:Label ID="Label5" runat="server" Text="Account Code"></asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
                 </td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
+                <td class="auto-style5">
+                </td>
+                <td class="auto-style9">
                     <asp:Label ID="Label6" runat="server" Text="Liquidity Order"></asp:Label>
                 </td>
-                <td>
+                <td class="auto-style6">
                     <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
                 </td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style7">
                     <asp:Label ID="Label7" runat="server" Text="Added by"></asp:Label>
                 </td>
                 <td>
                     <asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
                 </td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style7">
                     <asp:Label ID="Label8" runat="server" Text="Added on"></asp:Label>
                 </td>
                 <td>
                     <asp:Label ID="Label13" runat="server" Text="Label"></asp:Label>
                 </td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style7">
                     <asp:Label ID="Label9" runat="server" Text="Active"></asp:Label>
                 </td>
                 <td>
@@ -114,36 +141,36 @@
                         <asp:ListItem>Inactive</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style7">
                     <asp:Label ID="Label10" runat="server" Text="Comment"></asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
                 </td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style7">
         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Submit" Height="26px" />
                 </td>
-                <td>
-                    &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">
                     &nbsp;</td>
-                <td>
-                    &nbsp;</td>
+                <td class="auto-style7">
+        <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Return to Main" />
+                </td>
                 <td>&nbsp;</td>
             </tr>
         </table>
     
     </div>
-        <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Return to Main" />
         <br />
         <br />
         <br />

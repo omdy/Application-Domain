@@ -95,6 +95,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddingTransaction.aspx" />
     <Content Include="Event Log.aspx" />
     <Content Include="Journalize.aspx" />
     <Content Include="packages.config" />
@@ -115,6 +116,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddingTransaction.aspx.cs">
+      <DependentUpon>AddingTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddingTransaction.aspx.designer.cs">
+      <DependentUpon>AddingTransaction.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

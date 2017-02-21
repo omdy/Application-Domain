@@ -13,7 +13,7 @@ namespace WebApplication3
     {
 
         String user = "Andy Mecke";
-        String date = "02/16/2017";
+        String date = "02/20/2017";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,8 +53,8 @@ namespace WebApplication3
             }
             catch
             {
-                //Response.Write("You entered in one of the fields wrong.");
-                Response.Write(abDB);
+                Response.Write("You entered in one of the fields wrong.");
+                
             }
 
             
