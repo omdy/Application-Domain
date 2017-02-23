@@ -38,7 +38,7 @@ namespace WebApplication3
         {
             string tbl = "accountbalances";
             string acc = "Cash";
-            string place = "Actal Balance";
+            string place = "Actual Balance";
             string s = "";
 
             double addThem = getValueDB(tbl, acc, place) + getValueDB(tbl, acc, place);
