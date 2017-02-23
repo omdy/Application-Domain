@@ -27,6 +27,7 @@
         <br />
 
         <asp:GridView ID="GridView2" runat="server" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"></asp:GridView>
+        <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
         <br />
         <br />
         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Add Account" />
