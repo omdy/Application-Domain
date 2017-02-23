@@ -22,7 +22,7 @@
 
         <asp:GridView ID="GridView1" runat="server"></asp:GridView>
         <br />
-        <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Display Current Moniieees" />
+        <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Display Current Account Balances" />
         <br />
         <br />
 

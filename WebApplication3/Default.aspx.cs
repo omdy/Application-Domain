@@ -60,8 +60,8 @@ namespace WebApplication3
         {
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             con.Open();
-
-            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.accountbalances ORDER BY `Liquidity Order`", con);
+            //SELECT `Actual Balance` FROM `chartofaccounts`.`accountbalances` WHERE `Account` = '" + Label4.Text + "'"
+            MySqlCommand cmd = new MySqlCommand("select `Account`,`Actual Balance` from chartofaccounts.accountbalances", con);
             MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adp.Fill(ds);
