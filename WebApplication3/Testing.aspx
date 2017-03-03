@@ -19,7 +19,16 @@
         <br />
         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
         <br />
+        <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True">
+        </asp:DropDownList>
         <br />
+        <br />
+        <br />
+        <br />
+        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Button" />
+        <br />
+        <asp:ListBox ID="ListBox1" runat="server" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged"></asp:ListBox>
         <br />
         <br />
         <br />

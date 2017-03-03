@@ -11,22 +11,13 @@ namespace WebApplication3
 {
     public partial class Testing : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*
-            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con.Open();
 
-            MySqlCommand cmd = new MySqlCommand("select * from chartofaccounts.accountbalances ORDER BY `Liquidity Order`", con);
-            MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            adp.Fill(ds);
+            makeDropdown("accountbalances", "Account");
 
-            GridView2.DataSource = ds;
-            GridView2.DataBind();
-
-            cmd.Dispose();
-            con.Close();*/
+            //makeListThing("accountbalances", "Account");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -75,29 +66,102 @@ namespace WebApplication3
             return dbVal;
         }
 
-        public void insertAcc(string user, string date, string accName, string order, string code, string type, string side, string active, string comment)
+
+
+        public void updateDoubleDB(string tbl, string column, double amount, string account)
         {
-            MySqlConnection conIA = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            conIA.Open();
-            
+            MySqlConnection conUp = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conUp.Open();
 
-
-            String coaDB = "INSERT INTO chartofaccounts.chartofaccounts VALUES('" + accName + "','" + type + "','" + side + "','" + code + "','" + order + "','" + user + "','" + date + "','" + active + "','" + comment + "')";
-            MySqlCommand cmdIA = new MySqlCommand(coaDB, conIA);
+            String coaDB = "UPDATE `chartofaccounts`.`" + tbl + "` SET `" + column + "` = '" + amount + "' WHERE `Account` = '" + account + "'";
+            MySqlCommand cmdUp = new MySqlCommand(coaDB, conUp);
 
             try
             {
-                cmdIA.ExecuteNonQuery();
-                
+                cmdUp.ExecuteNonQuery();
+
             }
             catch
             {
                 Response.Write("Your account was not submitted. Please review the information submitted.");
             }
-            cmdIA.Dispose();
-            conIA.Close();
+            cmdUp.Dispose();
+            conUp.Close();
         }
-        
+
+        protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        public void makeDropdown(string tbl, string column)
+        {
+            DataTable things = new DataTable();
+
+            MySqlConnection contable = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            contable.Open();
+
+            MySqlCommand cmdtable = new MySqlCommand("select `" + column + "` from chartofaccounts."+ tbl, contable);
+            MySqlDataAdapter adp = new MySqlDataAdapter(cmdtable);
+
+            adp.Fill(things);
+
+            DropDownList1.DataSource = things;
+            DropDownList1.DataTextField = column;
+
+            DropDownList1.DataBind();
+            
+            cmdtable.Dispose();
+            contable.Close();
+        }
+
+        public void makeListThing(string tbl, string column)
+        {
+            //DataTable things = new DataTable();
+
+            MySqlConnection contable = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            contable.Open();
+
+            //MySqlCommand cmdtable = new MySqlCommand("select `" + column + "` from chartofaccounts." + tbl, contable);
+            MySqlCommand cmdtable = new MySqlCommand("select * from chartofaccounts." + tbl, contable);
+
+            MySqlDataAdapter adp = new MySqlDataAdapter(cmdtable);
+
+            DataTable dt = new DataTable();
+
+            adp.Fill(dt);
+
+            ListBox1.DataSource = dt;
+            ListBox1.DataBind();
+            ListBox1.DataTextField = column;
+            ListBox1.DataValueField = column;
+
+            //ListBox1.DataBind();
+
+            cmdtable.Dispose();
+            contable.Close();
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+
+
+            ListBox1.Items.Add(DropDownList1.SelectedValue);
+            TextBox2.Text = DropDownList1.SelectedItem.Text;
+
+            //listboxLoad(DropDownList1.Text);
+
+
+        }
+
+        public void listboxLoad(string str)
+        {
+            
+
+            
+        }
+
+
 
         //UPDATE `chartofaccounts`.`journaltran` SET `Account1`= '" + TextBox7.Text + "', `Value1`= '" + TextBox5.Text + "', `Account2`= '" + TextBox8.Text + "', `Value2`= '" + TextBox6.Text + "' WHERE `ID`= '1';
 
