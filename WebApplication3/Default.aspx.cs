@@ -13,7 +13,7 @@ namespace WebApplication3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //test
         }
         public void BindData()
         {
@@ -35,6 +35,7 @@ namespace WebApplication3
         protected void Button1_Click(object sender, EventArgs e)
         {
             BindData();
+
         }
 
         protected void Button2_Click(object sender, EventArgs e)

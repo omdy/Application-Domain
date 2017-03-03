@@ -13,73 +13,29 @@ namespace WebApplication3
     {
 
         String user = "Andy Mecke";
-        String date = "02/22/2017";
+        String date = "03/01/2017";
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con.Open();
-            MySqlConnection con2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con2.Open();
-            MySqlConnection con3 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con3.Open();
-            MySqlConnection con4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con4.Open();
-
-            String t1 = "SELECT `Account1` FROM `chartofaccounts`.`journaltran` WHERE `ID` =  '1'";
-            MySqlCommand cmdt1 = new MySqlCommand(t1, con);
-
-            String t2 = "SELECT `Account2` FROM `chartofaccounts`.`journaltran` WHERE `ID` =  '1'";
-            MySqlCommand cmdt2 = new MySqlCommand(t2, con2);
-
-            String t3 = "SELECT `Value1` FROM `chartofaccounts`.`journaltran` WHERE `ID` =  '1'";
-            MySqlCommand cmdt3 = new MySqlCommand(t3, con3);
-
-            String t4 = "SELECT `Value2` FROM `chartofaccounts`.`journaltran` WHERE `ID` =  '1'";
-            MySqlCommand cmdt4 = new MySqlCommand(t4, con4);
-
-            MySqlDataReader reader = cmdt1.ExecuteReader();
-            if (reader.Read())
-            {
-                String s = reader.GetValue(0).ToString();
-                Label3.Text = s;
-
-            }
             
-            MySqlDataReader reader2 = cmdt2.ExecuteReader();
-            if (reader2.Read())
-            {
-                String s = reader2.GetValue(0).ToString();
-                Label4.Text = s;
+            
 
-            }
+            
 
-            MySqlDataReader reader3 = cmdt3.ExecuteReader();
-            if (reader3.Read())
-            {
-                String s = reader3.GetValue(0).ToString();
-                Label5.Text = s;
+            Label3.Text = getStringDB("journaltran", "1", "Account1", "ID");
 
-            }
+        
 
-            MySqlDataReader reader4 = cmdt4.ExecuteReader();
-            if (reader4.Read())
-            {
-                String s = reader4.GetValue(0).ToString();
-                Label6.Text = s;
+            Label4.Text = getStringDB("journaltran", "1", "Account2", "ID");
 
-            }
+       
 
-            cmdt1.Dispose();
-            cmdt2.Dispose();
-            cmdt3.Dispose();
-            cmdt4.Dispose();
+            Label6.Text = getStringDB("journaltran", "1", "Value1", "ID");
 
-            con.Close();
-            con2.Close();
-            con3.Close();
-            con4.Close();
+            
+            Label5.Text = getStringDB("journaltran", "1", "Value2", "ID");
+            
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -116,10 +72,8 @@ namespace WebApplication3
         }
         void call1(double amount,double amount2)
         {
-            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con.Open();
-            MySqlConnection con2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con2.Open();
+            
+            
             MySqlConnection con3 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             con3.Open();
             MySqlConnection con4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
@@ -131,31 +85,15 @@ namespace WebApplication3
 
             String toEL = "" + amount;
             double dbAdd = 0;
-            String ab = "SELECT `Actual Balance` FROM `chartofaccounts`.`accountbalances` WHERE `Account` =  '" + Label3.Text + "'";
-            MySqlCommand cmdb = new MySqlCommand(ab, con);
+            
 
-
-
-            MySqlDataReader reader = cmdb.ExecuteReader();
-            if (reader.Read())
-            {
-                String s = reader.GetValue(0).ToString();
-                dbAdd = Double.Parse(s);
-            }
-            cmdb.Dispose();
+            dbAdd = getDoubleDB("accountbalances", Label3.Text, "Actual Balance");
+            
             amount = dbAdd + amount;
-            String abDB = "UPDATE `chartofaccounts`.`accountbalances` SET `Actual Balance` = '" + amount + "' WHERE `Account` = '" + Label3.Text + "'";
-            MySqlCommand cmd = new MySqlCommand(abDB, con2);
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch
-            {
-                Response.Write("You entered the credit field wrong.");
-            }
-            cmd.Dispose();
+            updateDoubleDB("accountbalances", "Actual Balance", amount, Label3.Text);
+
+            
 
 
 
@@ -228,13 +166,92 @@ namespace WebApplication3
 
 
             cmd4.Dispose();
-            con.Close();
-            con2.Close();
+            
             con3.Close();
             con4.Close();
             con5.Close();
             con6.Close();
             Response.Write("Your submission has been posted to the event log.");
         }
+
+        public double getDoubleDB(string tbl, string acc, string place)
+        {
+            double dbVal = 0;
+            MySqlConnection conVal = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conVal.Open();
+            String sVal = "SELECT `" + place + "` FROM `chartofaccounts`.`" + tbl + "` WHERE `Account` =  '" + acc + "'";
+            MySqlCommand cmdVal = new MySqlCommand(sVal, conVal);
+            try
+            {
+                MySqlDataReader reader2 = cmdVal.ExecuteReader();
+                if (reader2.Read())
+                {
+                    String s = reader2.GetValue(0).ToString();
+                    dbVal = Double.Parse(s);
+
+                }
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdVal.Dispose();
+            conVal.Close();
+            return dbVal;
+        }
+
+        public string getStringDB(string tbl, string condition, string column, string column2)
+        {
+            
+            MySqlConnection conVal = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conVal.Open();
+            String sVal = "SELECT `" + column + "` FROM `chartofaccounts`.`" + tbl + "` WHERE `" + column2 + "` =  '" + condition + "'";
+            String rString = "";
+            MySqlCommand cmdVal = new MySqlCommand(sVal, conVal);
+            try
+            {
+                MySqlDataReader reader2 = cmdVal.ExecuteReader();
+                if (reader2.Read())
+                {
+                    rString = reader2.GetValue(0).ToString();
+                    
+
+                }
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdVal.Dispose();
+            conVal.Close();
+            return rString;
+        }
+
+        public void updateDoubleDB(string tbl, string column, double amount, string account)
+        {
+            MySqlConnection conUp = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conUp.Open();
+
+            String coaDB = "UPDATE `chartofaccounts`.`" + tbl + "` SET `" + column + "` = '" + amount + "' WHERE `Account` = '" + account + "'";
+            MySqlCommand cmdUp = new MySqlCommand(coaDB, conUp);
+
+            try
+            {
+                cmdUp.ExecuteNonQuery();
+
+            }
+            catch
+            {
+                Response.Write("Your account was not submitted. Please review the information submitted.");
+            }
+            cmdUp.Dispose();
+            conUp.Close();
+        }
+
+
     }
 }

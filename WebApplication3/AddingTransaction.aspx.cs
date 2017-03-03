@@ -17,44 +17,7 @@ namespace WebApplication3
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*
-            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con.Open();
-
-            MySqlCommand cmd = new MySqlCommand("SELECT `Account Name` FROM `chartofaccounts` ORDER BY `Liquidity Order`", con);
-            MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            
-            adp.Fill();
-
-            DropDownList1.DataSource = ds;
-            DropDownList1.DataBind();
-
-            con.Close();
-
-            //cut here
-            DataTable dt = new DataTable;
-
-            using (MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy"))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT `Account Name` FROM `chartofaccounts` ORDER BY `Liquidity Order`", con))
-                {
-                    con.Open();
-                    MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                    adp.Fill(dt);
-                    if (dt.Rows.Count > 0)
-                    {
-                        for(int i = 0; i<dt.Rows.Count; i++)
-                        {
-                            objDept.
-                        }
-                    }
-
-                }
-            }*/
-            
-
-            
+                       
         }
 
         protected void TextBox4_TextChanged(object sender, EventArgs e)
@@ -72,34 +35,49 @@ namespace WebApplication3
         protected void Button3_Click(object sender, EventArgs e)
         {
 
-            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            con.Open();
+            
 
 
 
             //UPDATE `chartofaccounts`.`journaltran` SET `Account1`= '" + TextBox7.Text + "', `Value1`= '" + TextBox5.Text + "', `Account2`= '" + TextBox8.Text + "', `Value2`= '" + TextBox6.Text + "' WHERE `ID`= '1';
 
-            String evDB = "UPDATE `chartofaccounts`.`journaltran` SET `Account1`= '" + TextBox7.Text + "', `Value1`= '" + TextBox5.Text + "', `Account2`= '" + TextBox8.Text + "', `Value2`= '" + TextBox6.Text + "' WHERE `ID`= '1'";
-            MySqlCommand cmd2 = new MySqlCommand(evDB, con);
+            //String evDB = "UPDATE `chartofaccounts`.`journaltran` SET `Account1`= '" + TextBox7.Text + "', `Value1`= '" + TextBox5.Text + "', `Account2`= '" + TextBox8.Text + "', `Value2`= '" + TextBox6.Text + "' WHERE `ID`= '1'";
+            
+
+            updateDoubleDB("journaltran", "Account1", "ID", TextBox7.Text, "1");
+            updateDoubleDB("journaltran", "Value1", "ID", TextBox5.Text, "1");
+            updateDoubleDB("journaltran", "Account2", "ID", TextBox8.Text, "1");
+            updateDoubleDB("journaltran", "Value2", "ID", TextBox6.Text, "1");
+            //yes iehgexcceer
+
+
+            Response.Redirect("~/Journalize.aspx");
+
+
+            
+        }
+
+        public void updateDoubleDB(string tbl, string column, string Ccolumn,  string amount, string condition)
+        {
+            MySqlConnection conUp = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conUp.Open();
+
+            String coaDB = "UPDATE `chartofaccounts`.`" + tbl + "` SET `" + column + "` = '" + amount + "' WHERE `" + Ccolumn + "` = '" + condition + "'";
+            MySqlCommand cmdUp = new MySqlCommand(coaDB, conUp);
 
             try
             {
-                cmd2.ExecuteNonQuery();
-                Response.Redirect("~/Journalize.aspx");
+                cmdUp.ExecuteNonQuery();
+
             }
             catch
             {
-                Response.Write("You entered in one of the fields wrong for the event log.");
+                Response.Write("Your account was not submitted. Please review the information submitted.");
             }
-
-
-            cmd2.Dispose();
-            con.Close();
-            
-            //Response.Write("Your submission has been posted");
-           
+            cmdUp.Dispose();
+            conUp.Close();
         }
 
-        
+
     }
 }
