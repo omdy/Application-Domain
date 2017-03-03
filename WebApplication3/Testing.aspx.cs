@@ -13,7 +13,7 @@ namespace WebApplication3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //testing
+            
             makeDropdown("accountbalances", "Account");
 
             makeListThing("accountbalances", "Account");
