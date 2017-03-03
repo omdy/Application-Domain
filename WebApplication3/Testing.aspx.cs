@@ -11,12 +11,13 @@ namespace WebApplication3
 {
     public partial class Testing : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             makeDropdown("accountbalances", "Account");
 
-            makeListThing("accountbalances", "Account");
+            //makeListThing("accountbalances", "Account");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -116,20 +117,26 @@ namespace WebApplication3
 
         public void makeListThing(string tbl, string column)
         {
-            DataTable things = new DataTable();
+            //DataTable things = new DataTable();
 
             MySqlConnection contable = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             contable.Open();
 
-            MySqlCommand cmdtable = new MySqlCommand("select `" + column + "` from chartofaccounts." + tbl, contable);
+            //MySqlCommand cmdtable = new MySqlCommand("select `" + column + "` from chartofaccounts." + tbl, contable);
+            MySqlCommand cmdtable = new MySqlCommand("select * from chartofaccounts." + tbl, contable);
+
             MySqlDataAdapter adp = new MySqlDataAdapter(cmdtable);
 
-            adp.Fill(things);
+            DataTable dt = new DataTable();
 
-            ListBox1.DataSource = things;
-            ListBox1.DataTextField = column;
+            adp.Fill(dt);
 
+            ListBox1.DataSource = dt;
             ListBox1.DataBind();
+            ListBox1.DataTextField = column;
+            ListBox1.DataValueField = column;
+
+            //ListBox1.DataBind();
 
             cmdtable.Dispose();
             contable.Close();
@@ -138,14 +145,18 @@ namespace WebApplication3
         protected void Button3_Click(object sender, EventArgs e)
         {
 
-            listboxLoad(TextBox2.Text);
+
+            ListBox1.Items.Add(DropDownList1.SelectedValue);
+            TextBox2.Text = DropDownList1.SelectedItem.Text;
+
+            //listboxLoad(DropDownList1.Text);
 
 
         }
 
         public void listboxLoad(string str)
         {
-            ListBox1.Items.Add(str);
+            
 
             
         }

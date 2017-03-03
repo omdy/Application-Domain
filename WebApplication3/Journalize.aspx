@@ -70,7 +70,7 @@
             </tr>
             <tr>
                 <td class="auto-style4">
-                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True">
                     </asp:DropDownList>
                 </td>
                 <td class="auto-style3">
@@ -97,7 +97,7 @@
         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
-        <asp:ListBox ID="ListBox1" runat="server" Height="168px" Width="437px"></asp:ListBox>
+        <asp:ListBox ID="ListBox1" runat="server" AppendDataBoundItems="True" Height="168px" Width="437px"></asp:ListBox>
         <br />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />

@@ -76,7 +76,7 @@ namespace WebApplication3
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            string ddS = DropDownList1.Text;
+            string ddS = DropDownList1.SelectedValue;
             string tb1S = TextBox1.Text;
             string tb2S = TextBox2.Text;
 
@@ -296,6 +296,7 @@ namespace WebApplication3
 
             DropDownList1.DataSource = things;
             DropDownList1.DataTextField = column;
+
 
             DropDownList1.DataBind();
 

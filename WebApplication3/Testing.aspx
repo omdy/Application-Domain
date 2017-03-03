@@ -19,7 +19,7 @@
         <br />
         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
         <br />
-        <asp:DropDownList ID="DropDownList1" runat="server">
+        <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True">
         </asp:DropDownList>
         <br />
         <br />
