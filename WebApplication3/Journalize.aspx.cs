@@ -12,18 +12,26 @@ namespace WebApplication3
     public partial class Journalize : System.Web.UI.Page
     {
 
+
         String user = "Andy Mecke";
         String date = "03/01/2017";
+
+        int idI = 0;
+
+        List<string> idL;
+        List<string> accountL;
+        List<string> debitL;
+        List<string> creditL;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            
 
-            
+            makeDropdown("accountbalances", "Account");
 
-            Label3.Text = getStringDB("journaltran", "1", "Account1", "ID");
+
+
+            /*Label3.Text = getStringDB("journaltran", "1", "Account1", "ID");
 
         
 
@@ -34,8 +42,8 @@ namespace WebApplication3
             Label6.Text = getStringDB("journaltran", "1", "Value1", "ID");
 
             
-            Label5.Text = getStringDB("journaltran", "1", "Value2", "ID");
-            
+            Label5.Text = getStringDB("journaltran", "1", "Value2", "ID");*/
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -44,7 +52,7 @@ namespace WebApplication3
 
 
 
-            double amount = Double.Parse(Label5.Text);
+            /*double amount = Double.Parse(Label5.Text);
             double amount2 = Double.Parse(Label6.Text);
 
             if (amount == 0 && amount2 == 0)
@@ -55,7 +63,7 @@ namespace WebApplication3
             {
                 Response.Write("You cannot make an entry that doesn't balance. Go to Add/Edit");
             }
-            else call1(amount, amount2);
+            else call1(amount, amount2);*/
                 
             
             
@@ -68,9 +76,31 @@ namespace WebApplication3
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/AddingTransaction.aspx");
+            string ddS = DropDownList1.Text;
+            string tb1S = TextBox1.Text;
+            string tb2S = TextBox2.Text;
+
+
+            /*List<string> idL;
+            List<string> accountL;
+            List<string> debitL;
+            List<string> creditL;
+
+            accountL.Add(ddS);
+            debitL.Add(tb1S);
+            creditL.Add(tb2S);*/
+
+            string toLB = ddS + " " + tb1S + " " + tb2S;
+
+            ListBox1.Items.Add(toLB);
+
+
+
+
+
+            //Response.Redirect("~/AddingTransaction.aspx");
         }
-        void call1(double amount,double amount2)
+        /*void call1(double amount,double amount2)
         {
             
             
@@ -172,7 +202,7 @@ namespace WebApplication3
             con5.Close();
             con6.Close();
             Response.Write("Your submission has been posted to the event log.");
-        }
+        }*/
 
         public double getDoubleDB(string tbl, string acc, string place)
         {
@@ -250,6 +280,27 @@ namespace WebApplication3
             }
             cmdUp.Dispose();
             conUp.Close();
+        }
+
+        public void makeDropdown(string tbl, string column)
+        {
+            DataTable things = new DataTable();
+
+            MySqlConnection contable = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            contable.Open();
+
+            MySqlCommand cmdtable = new MySqlCommand("select `" + column + "` from chartofaccounts." + tbl, contable);
+            MySqlDataAdapter adp = new MySqlDataAdapter(cmdtable);
+
+            adp.Fill(things);
+
+            DropDownList1.DataSource = things;
+            DropDownList1.DataTextField = column;
+
+            DropDownList1.DataBind();
+
+            cmdtable.Dispose();
+            contable.Close();
         }
 
 

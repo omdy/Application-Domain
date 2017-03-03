@@ -8,9 +8,13 @@
     <style type="text/css">
         .auto-style1 {
             width: 100%;
+            height: 74px;
         }
         .auto-style3 {
-            width: 160px;
+            width: 137px;
+        }
+        .auto-style4 {
+            width: 120px;
         }
     </style>
 
@@ -56,37 +60,50 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+        <br />
+
         <table class="auto-style1">
             <tr>
-                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style4">&nbsp;</td>
                 <td class="auto-style3">Debit</td>
                 <td>Credit</td>
             </tr>
             <tr>
-                <td class="auto-style3">
-                    <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                <td class="auto-style4">
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    </asp:DropDownList>
                 </td>
                 <td class="auto-style3">
-                    <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
+                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                 </td>
-                <td>&nbsp;</td>
+                <td>
+                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                </td>
             </tr>
             <tr>
-                <td class="auto-style3">
-                    <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-                </td>
-                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style4">
+                    &nbsp;</td>
+                <td class="auto-style3">Comment:</td>
                 <td>
-                    <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+                    <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
                 </td>
             </tr>
         </table>
+        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button3" runat="server" Text="Add" OnClick="Button3_Click" />
+        &nbsp;&nbsp;&nbsp;
+        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button4" runat="server" Text="Delete" OnClick="Button3_Click" />
+        <asp:DropDownList ID="DropDownList2" runat="server">
+        </asp:DropDownList>
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+        <asp:ListBox ID="ListBox1" runat="server" Height="168px" Width="437px"></asp:ListBox>
+        <br />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <br />
-        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button3" runat="server" Text="Add/Edit" OnClick="Button3_Click" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <br />
