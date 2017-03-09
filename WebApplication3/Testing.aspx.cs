@@ -18,6 +18,42 @@ namespace WebApplication3
             makeDropdown("accountbalances", "Account");
 
             //makeListThing("accountbalances", "Account");
+
+            List<string> accountL = new List<string>();
+
+            MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead.Open();
+            String sVal = "SELECT `account` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead = new MySqlCommand(sVal, conRead);
+            try
+            {
+                
+                MySqlDataReader reader = cmdRead.ExecuteReader();
+                while (reader.Read())
+                {
+                    accountL.Add(reader.GetString(0));
+                    
+
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+            string[] accountA = accountL.ToArray();
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                Response.Write(accountA[i]);
+            }
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                ListBox1.Items.Add(accountA[i]);
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
