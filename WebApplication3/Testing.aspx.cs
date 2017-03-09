@@ -197,6 +197,12 @@ namespace WebApplication3
             
         }
 
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            double dub = 10;
+            Label1.Text = String.Format("{0:0.00}", dub);
+        }
+
 
 
         //UPDATE `chartofaccounts`.`journaltran` SET `Account1`= '" + TextBox7.Text + "', `Value1`= '" + TextBox5.Text + "', `Account2`= '" + TextBox8.Text + "', `Value2`= '" + TextBox6.Text + "' WHERE `ID`= '1';

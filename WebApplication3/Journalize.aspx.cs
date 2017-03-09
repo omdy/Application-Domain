@@ -243,8 +243,8 @@ namespace WebApplication3
                         DataTable dt = new DataTable();
                         dt.Columns.Add("ID", typeof(int));
                         dt.Columns.Add("Account", typeof(string));
-                        dt.Columns.Add("Debit", typeof(double));
-                        dt.Columns.Add("Credit", typeof(double));
+                        dt.Columns.Add("Debit", typeof(string));
+                        dt.Columns.Add("Credit", typeof(string));
 
                         int[] idA = idL.ToArray();
                         string[] accountA = accountL.ToArray();
@@ -273,14 +273,34 @@ namespace WebApplication3
 
                         for (int i = 0; i <= accountA.Length - 1; i++)
                         {
+                            string dS = "";
+                            string cS = "";
+
                             if (i == 0)
                             {
                                 //This one will add the $
                                 DataRow row = dt.NewRow();
                                 row["ID"] = idA[i];
                                 row["Account"] = accountA[i];
-                                row["Debit"] = debitA[i];
-                                row["Credit"] = creditA[i];
+                                if (debitA[i] == 0)
+                                {
+                                    row["Debit"] = "";
+                                }
+                                else
+                                {
+                                    dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                                    row["Debit"] = dS;
+                                }
+                                if (creditA[i] == 0)
+                                {
+                                    row["Credit"] = cS;
+                                }
+                                else
+                                {
+                                    cS = String.Format("{0:0.00}", creditA[i]);
+                                    row["Credit"] = cS;
+                                }
+                                
                                 dt.Rows.Add(row);
                             }
                             else
@@ -288,8 +308,24 @@ namespace WebApplication3
                                 DataRow row = dt.NewRow();
                                 row["ID"] = idA[i];
                                 row["Account"] = accountA[i];
-                                row["Debit"] = debitA[i];
-                                row["Credit"] = creditA[i];
+                                if (debitA[i] == 0)
+                                {
+                                    row["Debit"] = "";
+                                }
+                                else
+                                {
+                                    dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                                    row["Debit"] = dS;
+                                }
+                                if (creditA[i] == 0)
+                                {
+                                    row["Credit"] = cS;
+                                }
+                                else
+                                {
+                                    cS = String.Format("{0:0.00}", creditA[i]);
+                                    row["Credit"] = cS;
+                                }
                                 dt.Rows.Add(row);
                             }
 
@@ -304,7 +340,7 @@ namespace WebApplication3
                         TextBox1.Text = "0";
                         TextBox2.Text = "0";
 
-                        Label4.Visible = true;
+                        Label1.Visible = true;
                         Label1.ForeColor = System.Drawing.Color.Blue;
                         Label1.Text = "Added";
 
