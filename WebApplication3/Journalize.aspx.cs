@@ -314,7 +314,7 @@ namespace WebApplication3
                                 }
                                 else
                                 {
-                                    dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                                    dS = String.Format("{0:0.00}", debitA[i]);
                                     row["Debit"] = dS;
                                 }
                                 if (creditA[i] == 0)
