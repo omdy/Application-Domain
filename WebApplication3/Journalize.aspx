@@ -70,7 +70,7 @@
             </tr>
             <tr>
                 <td class="auto-style4">
-                    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True">
+                    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                     </asp:DropDownList>
                 </td>
                 <td class="auto-style3">
@@ -91,12 +91,13 @@
         </table>
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button3" runat="server" Text="Add" OnClick="Button3_Click" />
         &nbsp;&nbsp;&nbsp;
-        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button4" runat="server" Text="Delete" OnClick="Button3_Click" />
+        <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Delete" />
         <asp:DropDownList ID="DropDownList2" runat="server">
         </asp:DropDownList>
         <br />
         <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
         <br />
         <br />
         <br />

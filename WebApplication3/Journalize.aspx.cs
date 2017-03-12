@@ -18,10 +18,7 @@ namespace WebApplication3
 
         int idI = 0;
 
-        /*List<string> idL = new List<string>();
-        List<string> accountL = new List<string>();
-        List<string> debitL = new List<string>();
-        List<string> creditL = new List<string>();*/
+        
 
         DataTable dt = new DataTable();
         DataRow rw;
@@ -129,8 +126,7 @@ namespace WebApplication3
 
                         insertStringDB(tbl, DropDownList1.SelectedValue, TextBox1.Text, TextBox2.Text);
 
-                        Response.Write(TextBox1.Text);
-                        Response.Write(TextBox2.Text);
+                        
 
 
 
@@ -334,8 +330,17 @@ namespace WebApplication3
 
                         }
 
+
+
                         GridView1.DataSource = dt;
                         GridView1.DataBind();
+
+                        DropDownList2.DataSource = dt;
+                        DropDownList2.DataTextField = "ID";
+
+
+                        DropDownList2.DataBind();
+
 
                         TextBox1.Text = "0";
                         TextBox2.Text = "0";
@@ -371,8 +376,262 @@ namespace WebApplication3
             }
             
         }
-        
 
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            string ddS = DropDownList2.SelectedValue;
+
+            MySqlConnection conDel = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conDel.Open();
+            String sDel = "DELETE FROM FROM `chartofaccounts`.`journaltran` WHERE `ID` =  '" + ddS + "'";
+            MySqlCommand cmdDel = new MySqlCommand(sDel, conDel);
+
+            try
+            {
+                cmdDel.ExecuteNonQuery();
+            }
+            catch
+            {
+                Response.Write("Something went wrong with deleting." + sDel);
+            }
+            cmdDel.Dispose();
+            conDel.Close();
+
+            string tbl = "journaltran";
+
+           
+
+            List<int> idL = new List<int>();
+            List<string> accountL = new List<string>();
+            List<double> debitL = new List<double>();
+            List<double> creditL = new List<double>();
+
+            
+
+
+
+
+
+            MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead.Open();
+            String sVal = "SELECT `account` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead = new MySqlCommand(sVal, conRead);
+            try
+            {
+                MySqlDataReader reader = cmdRead.ExecuteReader();
+                while (reader.Read())
+                {
+                    accountL.Add(reader.GetString(0));
+
+
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdRead.Dispose();
+            conRead.Close();
+
+            MySqlConnection conRead2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead2.Open();
+            sVal = "SELECT `debit` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead2 = new MySqlCommand(sVal, conRead2);
+            try
+            {
+
+
+                MySqlDataReader reader2 = cmdRead2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    debitL.Add(Double.Parse(reader2.GetString(0)));
+
+
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdRead2.Dispose();
+            conRead2.Close();
+
+            MySqlConnection conRead3 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead3.Open();
+            sVal = "SELECT `credit` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead3 = new MySqlCommand(sVal, conRead3);
+            try
+            {
+                MySqlDataReader reader3 = cmdRead3.ExecuteReader();
+                while (reader3.Read())
+                {
+                    creditL.Add(Double.Parse(reader3.GetString(0)));
+
+
+                }
+
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+            MySqlConnection conRead4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead4.Open();
+            sVal = "SELECT `ID` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead4 = new MySqlCommand(sVal, conRead4);
+            try
+            {
+                MySqlDataReader reader4 = cmdRead4.ExecuteReader();
+                while (reader4.Read())
+                {
+                    idL.Add(Int32.Parse(reader4.GetString(0)));
+
+
+                }
+
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdRead4.Dispose();
+            conRead4.Close();
+
+            /*idL.Add((idL.Count) + 1);
+            accountL.Add(DropDownList1.SelectedValue);
+            debitL.Add(Double.Parse(TextBox1.Text));
+            creditL.Add(Double.Parse(TextBox2.Text));*/
+
+
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Account", typeof(string));
+            dt.Columns.Add("Debit", typeof(string));
+            dt.Columns.Add("Credit", typeof(string));
+
+            int[] idA = idL.ToArray();
+            string[] accountA = accountL.ToArray();
+            double[] debitA = debitL.ToArray();
+            double[] creditA = creditL.ToArray();
+
+            double dSum = 0;
+            double cSum = 0;
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                dSum = dSum + debitA[i];
+
+            }
+
+            Label2.Text = "" + dSum;
+
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                cSum = cSum + creditA[i];
+
+            }
+
+            Label3.Text = "" + cSum;
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                string dS = "";
+                string cS = "";
+
+                if (i == 0)
+                {
+                    //This one will add the $
+                    DataRow row = dt.NewRow();
+                    row["ID"] = idA[i];
+                    row["Account"] = accountA[i];
+                    if (debitA[i] == 0)
+                    {
+                        row["Debit"] = "";
+                    }
+                    else
+                    {
+                        dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                        row["Debit"] = dS;
+                    }
+                    if (creditA[i] == 0)
+                    {
+                        row["Credit"] = cS;
+                    }
+                    else
+                    {
+                        cS = String.Format("{0:0.00}", creditA[i]);
+                        row["Credit"] = cS;
+                    }
+
+                    dt.Rows.Add(row);
+                }
+                else
+                {
+                    DataRow row = dt.NewRow();
+                    row["ID"] = idA[i];
+                    row["Account"] = accountA[i];
+                    if (debitA[i] == 0)
+                    {
+                        row["Debit"] = "";
+                    }
+                    else
+                    {
+                        dS = String.Format("{0:0.00}", debitA[i]);
+                        row["Debit"] = dS;
+                    }
+                    if (creditA[i] == 0)
+                    {
+                        row["Credit"] = cS;
+                    }
+                    else
+                    {
+                        cS = String.Format("{0:0.00}", creditA[i]);
+                        row["Credit"] = cS;
+                    }
+                    dt.Rows.Add(row);
+                }
+
+
+
+
+            }
+
+
+
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+
+            DropDownList2.DataSource = dt;
+            DropDownList2.DataTextField = "ID";
+
+
+            DropDownList2.DataBind();
+
+
+            TextBox1.Text = "0";
+            TextBox2.Text = "0";
+
+            Label5.Visible = true;
+            Label5.ForeColor = System.Drawing.Color.Red;
+            Label5.Text = "Row " + ddS + " deleted!";
+
+        }
         public double getDoubleDB(string tbl, string acc, string place)
         {
             double dbVal = 0;
@@ -686,6 +945,266 @@ namespace WebApplication3
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            string ddS = DropDownList2.SelectedValue;
+
+            MySqlConnection conDel = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conDel.Open();
+            String sDel = "DELETE FROM `chartofaccounts`.`journaltran` WHERE `ID` =  '" + ddS + "'";
+            MySqlCommand cmdDel = new MySqlCommand(sDel, conDel);
+
+            try
+            {
+                cmdDel.ExecuteNonQuery();
+            }
+            catch
+            {
+                Response.Write("Something went wrong with deleting." + sDel);
+            }
+            cmdDel.Dispose();
+            conDel.Close();
+
+            string tbl = "journaltran";
+
+
+
+            List<int> idL = new List<int>();
+            List<string> accountL = new List<string>();
+            List<double> debitL = new List<double>();
+            List<double> creditL = new List<double>();
+
+
+
+
+
+
+
+            MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead.Open();
+            String sVal = "SELECT `account` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead = new MySqlCommand(sVal, conRead);
+            try
+            {
+                MySqlDataReader reader = cmdRead.ExecuteReader();
+                while (reader.Read())
+                {
+                    accountL.Add(reader.GetString(0));
+
+
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdRead.Dispose();
+            conRead.Close();
+
+            MySqlConnection conRead2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead2.Open();
+            sVal = "SELECT `debit` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead2 = new MySqlCommand(sVal, conRead2);
+            try
+            {
+
+
+                MySqlDataReader reader2 = cmdRead2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    debitL.Add(Double.Parse(reader2.GetString(0)));
+
+
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdRead2.Dispose();
+            conRead2.Close();
+
+            MySqlConnection conRead3 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead3.Open();
+            sVal = "SELECT `credit` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead3 = new MySqlCommand(sVal, conRead3);
+            try
+            {
+                MySqlDataReader reader3 = cmdRead3.ExecuteReader();
+                while (reader3.Read())
+                {
+                    creditL.Add(Double.Parse(reader3.GetString(0)));
+
+
+                }
+
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+            MySqlConnection conRead4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead4.Open();
+            sVal = "SELECT `ID` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead4 = new MySqlCommand(sVal, conRead4);
+            try
+            {
+                MySqlDataReader reader4 = cmdRead4.ExecuteReader();
+                while (reader4.Read())
+                {
+                    idL.Add(Int32.Parse(reader4.GetString(0)));
+
+
+                }
+
+
+
+            }
+            catch
+            {
+                Response.Write(sVal);
+            }
+
+
+            cmdRead4.Dispose();
+            conRead4.Close();
+
+            /*idL.Add((idL.Count) + 1);
+            accountL.Add(DropDownList1.SelectedValue);
+            debitL.Add(Double.Parse(TextBox1.Text));
+            creditL.Add(Double.Parse(TextBox2.Text));*/
+
+
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Account", typeof(string));
+            dt.Columns.Add("Debit", typeof(string));
+            dt.Columns.Add("Credit", typeof(string));
+
+            int[] idA = idL.ToArray();
+            string[] accountA = accountL.ToArray();
+            double[] debitA = debitL.ToArray();
+            double[] creditA = creditL.ToArray();
+
+            double dSum = 0;
+            double cSum = 0;
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                dSum = dSum + debitA[i];
+
+            }
+
+            Label2.Text = "" + dSum;
+
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                cSum = cSum + creditA[i];
+
+            }
+
+            Label3.Text = "" + cSum;
+
+            for (int i = 0; i <= accountA.Length - 1; i++)
+            {
+                string dS = "";
+                string cS = "";
+
+                if (i == 0)
+                {
+                    //This one will add the $
+                    DataRow row = dt.NewRow();
+                    row["ID"] = idA[i];
+                    row["Account"] = accountA[i];
+                    if (debitA[i] == 0)
+                    {
+                        row["Debit"] = "";
+                    }
+                    else
+                    {
+                        dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                        row["Debit"] = dS;
+                    }
+                    if (creditA[i] == 0)
+                    {
+                        row["Credit"] = cS;
+                    }
+                    else
+                    {
+                        cS = String.Format("{0:0.00}", creditA[i]);
+                        row["Credit"] = cS;
+                    }
+
+                    dt.Rows.Add(row);
+                }
+                else
+                {
+                    DataRow row = dt.NewRow();
+                    row["ID"] = idA[i];
+                    row["Account"] = accountA[i];
+                    if (debitA[i] == 0)
+                    {
+                        row["Debit"] = "";
+                    }
+                    else
+                    {
+                        dS = String.Format("{0:0.00}", debitA[i]);
+                        row["Debit"] = dS;
+                    }
+                    if (creditA[i] == 0)
+                    {
+                        row["Credit"] = cS;
+                    }
+                    else
+                    {
+                        cS = String.Format("{0:0.00}", creditA[i]);
+                        row["Credit"] = cS;
+                    }
+                    dt.Rows.Add(row);
+                }
+
+
+
+
+            }
+
+
+
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+
+            DropDownList2.DataSource = dt;
+            DropDownList2.DataTextField = "ID";
+
+
+            DropDownList2.DataBind();
+
+
+            TextBox1.Text = "0";
+            TextBox2.Text = "0";
+
+            Label5.Visible = true;
+            Label5.ForeColor = System.Drawing.Color.Red;
+            Label5.Text = "Row " + ddS + " deleted!";
         }
     }
 }

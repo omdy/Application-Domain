@@ -103,6 +103,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Event Log.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Inspect.aspx" />
     <Content Include="Journalize.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -156,6 +157,13 @@
     </Compile>
     <Compile Include="Event Log.aspx.designer.cs">
       <DependentUpon>Event Log.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inspect.aspx.cs">
+      <DependentUpon>Inspect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inspect.aspx.designer.cs">
+      <DependentUpon>Inspect.aspx</DependentUpon>
     </Compile>
     <Compile Include="Journalize.aspx.cs">
       <DependentUpon>Journalize.aspx</DependentUpon>
