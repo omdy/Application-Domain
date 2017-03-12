@@ -58,7 +58,161 @@ namespace WebApplication3
 
                 if (temp == temp2)
                 {
-                    Response.Write("It balances!");
+
+                    List<int> idL = new List<int>();
+                    List<string> accountL = new List<string>();
+                    List<double> debitL = new List<double>();
+                    List<double> creditL = new List<double>();
+
+
+
+
+
+
+
+                    MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+                    conRead.Open();
+                    String sVal = "SELECT `account` FROM `chartofaccounts`.`journaltran`";
+                    MySqlCommand cmdRead = new MySqlCommand(sVal, conRead);
+                    try
+                    {
+                        MySqlDataReader reader = cmdRead.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            accountL.Add(reader.GetString(0));
+
+
+                        }
+
+
+                    }
+                    catch
+                    {
+                        Response.Write(sVal);
+                    }
+
+
+                    cmdRead.Dispose();
+                    conRead.Close();
+
+                    MySqlConnection conRead2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+                    conRead2.Open();
+                    sVal = "SELECT `debit` FROM `chartofaccounts`.`journaltran`";
+                    MySqlCommand cmdRead2 = new MySqlCommand(sVal, conRead2);
+                    try
+                    {
+
+
+                        MySqlDataReader reader2 = cmdRead2.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            debitL.Add(Double.Parse(reader2.GetString(0)));
+
+
+                        }
+
+
+                    }
+                    catch
+                    {
+                        Response.Write(sVal);
+                    }
+
+
+                    cmdRead2.Dispose();
+                    conRead2.Close();
+
+                    MySqlConnection conRead3 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+                    conRead3.Open();
+                    sVal = "SELECT `credit` FROM `chartofaccounts`.`journaltran`";
+                    MySqlCommand cmdRead3 = new MySqlCommand(sVal, conRead3);
+                    try
+                    {
+                        MySqlDataReader reader3 = cmdRead3.ExecuteReader();
+                        while (reader3.Read())
+                        {
+                            creditL.Add(Double.Parse(reader3.GetString(0)));
+
+
+                        }
+
+
+
+                    }
+                    catch
+                    {
+                        Response.Write(sVal);
+                    }
+                    MySqlConnection conRead4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+                    conRead4.Open();
+                    sVal = "SELECT `ID` FROM `chartofaccounts`.`journaltran`";
+                    MySqlCommand cmdRead4 = new MySqlCommand(sVal, conRead4);
+                    try
+                    {
+                        MySqlDataReader reader4 = cmdRead4.ExecuteReader();
+                        while (reader4.Read())
+                        {
+                            idL.Add(Int32.Parse(reader4.GetString(0)));
+
+
+                        }
+
+
+
+                    }
+                    catch
+                    {
+                        Response.Write(sVal);
+                    }
+
+
+                    cmdRead4.Dispose();
+                    conRead4.Close();
+
+                    
+
+
+
+                    
+
+                    int[] idA = idL.ToArray();
+                    string[] accountA = accountL.ToArray();
+                    double[] debitA = debitL.ToArray();
+                    double[] creditA = creditL.ToArray();
+
+                    
+
+                   
+
+                    for (int i = 0; i <= accountA.Length - 1; i++)
+                    {
+                        string tbS = TextBox5.Text;
+
+
+                        insertStringDB2("journalsub", tbS, idA[i], accountA[i], String.Format("{0:0.00}", debitA[i]), String.Format("{0:0.00}", creditA[i]));
+
+
+
+
+                    }
+
+                    MySqlConnection conDel = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+                    conDel.Open();
+                    String sDel = "TRUNCATE TABLE `chartofaccounts`.`journaltran`";
+                    MySqlCommand cmdDel = new MySqlCommand(sDel, conDel);
+                    try
+                    {
+                        cmdDel.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        Response.Write("Yo it no remove stuff.");
+                    }
+
+
+                    Response.Redirect("~/Default.aspx");
+
+                    
                 }
                 else
                 {
@@ -754,6 +908,30 @@ namespace WebApplication3
             cmdIN.Dispose();
             conIN.Close();
         }
+
+        public void insertStringDB2(string tbl_name,string title, int id, string account, string debit, string credit)
+        {
+            MySqlConnection conIN2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conIN2.Open();
+
+
+
+            String coaDB2 = "INSERT INTO `chartofaccounts`.`" + tbl_name + "` (`Title`,`ID`,`Account`,`Debit`,`Credit`) VALUES('" + title + "','" + id + "','" + account + "','" + debit + "','" + credit + "')";
+            MySqlCommand cmdIN2 = new MySqlCommand(coaDB2, conIN2);
+
+            try
+            {
+                cmdIN2.ExecuteNonQuery();
+
+            }
+            catch
+            {
+                Response.Write("Your account transaction was not submitted. Please review the information submitted.");
+            }
+            cmdIN2.Dispose();
+            conIN2.Close();
+        }
+
 
         public void BindData()
         {

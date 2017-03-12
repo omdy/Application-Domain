@@ -97,7 +97,7 @@
         <br />
         <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="Label5" runat="server" Text="Label" Visible="False"></asp:Label>
         <br />
         <br />
         <br />
@@ -126,6 +126,9 @@
         <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
         <asp:Button ID="Button5" runat="server" Text="Browse to Upload File" />
         <br />
+        <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
+        <br />
+        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
