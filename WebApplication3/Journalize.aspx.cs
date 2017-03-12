@@ -238,7 +238,21 @@ namespace WebApplication3
 
         protected void Button2_Click(object sender, EventArgs e)
         {
+            MySqlConnection conDel = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conDel.Open();
+            String sDel = "TRUNCATE TABLE `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdDel = new MySqlCommand(sDel, conDel);
+            try
+            {
+                cmdDel.ExecuteNonQuery();
+            }
+            catch
+            {
+                Response.Write("Yo it no remove stuff.");
+            }
+
             Response.Redirect("~/Default.aspx");
+            
         }
 
         protected void Button3_Click(object sender, EventArgs e)
