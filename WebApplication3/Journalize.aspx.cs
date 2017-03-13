@@ -12,7 +12,7 @@ namespace WebApplication3
     public partial class Journalize : System.Web.UI.Page
     {
 
-
+        //comm
         String user = "Andy Mecke";
         String date = "03/13/2017";
 
