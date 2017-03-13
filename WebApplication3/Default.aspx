@@ -59,13 +59,7 @@
   </div><!-- /.container-fluid -->
 </nav>
         <div style="text-align: center;">
-          <asp:Button ID="Button7" runat="server" Text="Display Chart of Accounts" OnClick="Button1_Click" style="background-color:lightgreen" class="btn btn-default" />
-        <br />
-        <br />
-            <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button11" runat="server" OnClick="Button6_Click" Text="Display Current Account Balances" />
-        <br />
-        <br />
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+          <asp:Button ID="Button7" runat="server" Text="Chart of Accounts" OnClick="Button1_Click" style="background-color:lightgreen" class="btn btn-default" />
         <br />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button2_Click" Text="Add Account" />

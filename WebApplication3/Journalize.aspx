@@ -16,6 +16,15 @@
         .auto-style4 {
             width: 120px;
         }
+        .auto-style5 {
+            width: 91px;
+        }
+        .auto-style6 {
+            width: 66px;
+        }
+        .auto-style7 {
+            width: 202px;
+        }
     </style>
 
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
@@ -89,17 +98,35 @@
                 </td>
             </tr>
         </table>
-        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button3" runat="server" Text="Add" OnClick="Button3_Click" />
         &nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Delete" />
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+        <table class="nav-justified">
+            <tr>
+                <td class="auto-style5">
+        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button3" runat="server" Text="Add" OnClick="Button3_Click" />
+                </td>
+                <td class="auto-style6">
+                    <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Delete" />
+                </td>
+                <td>
         <asp:DropDownList ID="DropDownList2" runat="server">
         </asp:DropDownList>
-        <br />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
         <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="Label5" runat="server" Text="Label" Visible="False"></asp:Label>
+                </td>
+                <td class="auto-style6">
+                    <asp:Label ID="Label5" runat="server" Text="Label" Visible="False"></asp:Label>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
         <br />
-        <br />
+
         <br />
         <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CellSpacing="2">
             <AlternatingRowStyle BackColor="White" />
@@ -115,20 +142,35 @@
             <SortedDescendingHeaderStyle BackColor="#15524A" />
 
         </asp:GridView>
+                    <table class="nav-justified">
+                        <tr>
+                            <td class="auto-style7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br />
+                                <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total:&nbsp;
+        <asp:Label ID="Label2" runat="server" Text="0.00" Visible="False"></asp:Label>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style7">&nbsp;</td>
+                            <td>
+        <asp:Label ID="Label3" runat="server" Text="0.00" Visible="False"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
         <br />
-        <asp:Label ID="Label2" runat="server" Text="0.00"></asp:Label>
 &nbsp;&nbsp;&nbsp;
         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="Label3" runat="server" Text="0.00"></asp:Label>
         <br />
         <br />
         <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
         <asp:Button ID="Button5" runat="server" Text="Browse to Upload File" />
         <br />
-        <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
-        <br />
-        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                    <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
+                    <br />
+                    <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

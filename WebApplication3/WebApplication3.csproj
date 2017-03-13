@@ -101,9 +101,11 @@
     <Content Include="Content\bootstrap-yeti.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="DisplayCOA.aspx" />
     <Content Include="Event Log.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Inspect.aspx" />
+    <Content Include="InspectingTrans.aspx" />
     <Content Include="Journalize.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -151,6 +153,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DisplayCOA.aspx.cs">
+      <DependentUpon>DisplayCOA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DisplayCOA.aspx.designer.cs">
+      <DependentUpon>DisplayCOA.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Event Log.aspx.cs">
       <DependentUpon>Event Log.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,6 +173,13 @@
     </Compile>
     <Compile Include="Inspect.aspx.designer.cs">
       <DependentUpon>Inspect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InspectingTrans.aspx.cs">
+      <DependentUpon>InspectingTrans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InspectingTrans.aspx.designer.cs">
+      <DependentUpon>InspectingTrans.aspx</DependentUpon>
     </Compile>
     <Compile Include="Journalize.aspx.cs">
       <DependentUpon>Journalize.aspx</DependentUpon>

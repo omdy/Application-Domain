@@ -14,7 +14,7 @@ namespace WebApplication3
 
 
         String user = "Andy Mecke";
-        String date = "03/08/2017";
+        String date = "03/13/2017";
 
         int idI = 0;
 
@@ -423,7 +423,7 @@ namespace WebApplication3
                             dSum = dSum + debitA[i];
 
                         }
-
+                        Label2.Visible = true;
                         Label2.Text = ""  + dSum;
 
 
@@ -432,7 +432,7 @@ namespace WebApplication3
                             cSum = cSum + creditA[i];
 
                         }
-
+                        Label3.Visible = true;
                         Label3.Text = "" + cSum;
 
                         for (int i = 0; i <= accountA.Length - 1; i++)
