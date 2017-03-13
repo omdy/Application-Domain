@@ -423,6 +423,7 @@ namespace WebApplication3
                             dSum = dSum + debitA[i];
 
                         }
+                        Label7.Visible = true;
                         Label2.Visible = true;
                         Label2.Text = ""  + dSum;
 

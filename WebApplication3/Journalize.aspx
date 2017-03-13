@@ -23,7 +23,7 @@
             width: 66px;
         }
         .auto-style7 {
-            width: 202px;
+            width: 156px;
         }
     </style>
 
@@ -126,7 +126,6 @@
             </tr>
         </table>
         <br />
-
         <br />
         <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CellSpacing="2">
             <AlternatingRowStyle BackColor="White" />
@@ -142,23 +141,25 @@
             <SortedDescendingHeaderStyle BackColor="#15524A" />
 
         </asp:GridView>
-                    <table class="nav-justified">
-                        <tr>
-                            <td class="auto-style7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <br />
-                                <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total:&nbsp;
+        <table class="nav-justified">
+            <tr>
+                <td class="auto-style7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <br />
+                    <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Label ID="Label7" runat="server" Text="Total:" Visible="False"></asp:Label>
+&nbsp;
         <asp:Label ID="Label2" runat="server" Text="0.00" Visible="False"></asp:Label>
-                            </td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style7">&nbsp;</td>
-                            <td>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style7">&nbsp;</td>
+                <td>
         <asp:Label ID="Label3" runat="server" Text="0.00" Visible="False"></asp:Label>
-                            </td>
-                        </tr>
-                    </table>
+                </td>
+            </tr>
+        </table>
         <br />
 &nbsp;&nbsp;&nbsp;
         <br />
@@ -168,9 +169,9 @@
         <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
         <asp:Button ID="Button5" runat="server" Text="Browse to Upload File" />
         <br />
-                    <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
-                    <br />
-                    <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+        <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
+        <br />
+        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

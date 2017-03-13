@@ -80,6 +80,13 @@ namespace WebApplication3
         {
 
         }
+
+        
+
+        protected void Button11_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("InspectingTrans.aspx");
+        }
     }
 
 }

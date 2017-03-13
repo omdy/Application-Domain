@@ -67,7 +67,7 @@
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button8" runat="server" Text="Journalize Transaction" OnClick="Button3_Click" />
             <br />
-        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button12" runat="server" Text="Accept Journalize" OnClick="Button3_Click" />
+            <asp:Button ID="Button11" runat="server" OnClick="Button11_Click" Text="Accepting Transactions" />
         <br />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button9" runat="server" OnClick="Button4_Click" Text="Event Log" />
