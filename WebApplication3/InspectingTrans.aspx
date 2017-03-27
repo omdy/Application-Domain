@@ -39,9 +39,12 @@
         </asp:GridView>
         <br />
         <br />
-        <asp:Button ID="Button2" runat="server" Text="Accept" />
+        <asp:Button ID="Button2" runat="server" Text="Accept" OnClick="Button2_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button3" runat="server" Text="Decline" />
+        <asp:Button ID="Button3" runat="server" Text="Decline" OnClick="Button3_Click" />
+        <br />
+        <br />
+        <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Return" />
         <br />
         <br />
     

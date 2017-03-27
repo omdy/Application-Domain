@@ -31,10 +31,13 @@ namespace WebApplication3
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            
 
-            makeDropdown("accountbalances", "Account");
+            if (!IsPostBack)
+            {
+                makeDropdown("accountbalances", "Account");
+            }
 
+            TextBox3.Text = "No Comment.";
             
 
 
@@ -63,12 +66,7 @@ namespace WebApplication3
                     List<string> accountL = new List<string>();
                     List<double> debitL = new List<double>();
                     List<double> creditL = new List<double>();
-
-
-
-
-
-
+                    
 
                     MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
                     conRead.Open();
@@ -189,7 +187,7 @@ namespace WebApplication3
                         string tbS = TextBox5.Text;
 
 
-                        insertStringDB2("journalsub", tbS, idA[i], accountA[i], String.Format("{0:0.00}", debitA[i]), String.Format("{0:0.00}", creditA[i]));
+                        insertStringDB2("posting", tbS, idA[i], accountA[i], String.Format("{0:0.00}", debitA[i]), String.Format("{0:0.00}", creditA[i]));
 
 
 
@@ -286,17 +284,17 @@ namespace WebApplication3
                         string tb1S = TextBox1.Text;
                         string tb2S = TextBox2.Text;
                         string tbComment = TextBox3.Text;
+                        
+
 
                         List<int> idL = new List<int>();
                         List<string> accountL = new List<string>();
                         List<double> debitL = new List<double>();
                         List<double> creditL = new List<double>();
+                        List<string> commentL = new List<string>();
 
-                        insertStringDB(tbl, DropDownList1.SelectedValue, TextBox1.Text, TextBox2.Text);
-
+                        insertStringDB(tbl, DropDownList1.SelectedValue, TextBox1.Text, TextBox2.Text, TextBox3.Text);
                         
-
-
 
                         MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
                         conRead.Open();
@@ -371,6 +369,10 @@ namespace WebApplication3
                         {
                             Response.Write(sVal);
                         }
+
+                        cmdRead3.Dispose();
+                        conRead3.Close();
+
                         MySqlConnection conRead4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
                         conRead4.Open();
                         sVal = "SELECT `ID` FROM `chartofaccounts`.`journaltran`";
@@ -397,6 +399,32 @@ namespace WebApplication3
                         cmdRead4.Dispose();
                         conRead4.Close();
 
+                        MySqlConnection conRead5 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+                        conRead5.Open();
+                        String sVal5 = "SELECT `comment` FROM `chartofaccounts`.`journaltran`";
+                        MySqlCommand cmdRead5 = new MySqlCommand(sVal5, conRead5);
+                        try
+                        {
+                            MySqlDataReader reader5 = cmdRead5.ExecuteReader();
+                            while (reader5.Read())
+                            {
+                                
+                                commentL.Add(reader5.GetString(0));
+                                
+
+                            }
+
+
+                        }
+                        catch
+                        {
+                            Response.Write(sVal5);
+                        }
+
+
+                        cmdRead5.Dispose();
+                        conRead5.Close();
+
                         /*idL.Add((idL.Count) + 1);
                         accountL.Add(DropDownList1.SelectedValue);
                         debitL.Add(Double.Parse(TextBox1.Text));
@@ -409,11 +437,14 @@ namespace WebApplication3
                         dt.Columns.Add("Account", typeof(string));
                         dt.Columns.Add("Debit", typeof(string));
                         dt.Columns.Add("Credit", typeof(string));
+                        dt.Columns.Add("Comment", typeof(string));
+                        
 
                         int[] idA = idL.ToArray();
                         string[] accountA = accountL.ToArray();
                         double[] debitA = debitL.ToArray();
                         double[] creditA = creditL.ToArray();
+                        string[] commentA = commentL.ToArray();
 
                         double dSum = 0;
                         double cSum = 0;
@@ -423,8 +454,7 @@ namespace WebApplication3
                             dSum = dSum + debitA[i];
 
                         }
-                        Label7.Visible = true;
-                        Label2.Visible = true;
+                        
                         Label2.Text = ""  + dSum;
 
 
@@ -433,7 +463,7 @@ namespace WebApplication3
                             cSum = cSum + creditA[i];
 
                         }
-                        Label3.Visible = true;
+                        
                         Label3.Text = "" + cSum;
 
                         for (int i = 0; i <= accountA.Length - 1; i++)
@@ -465,7 +495,7 @@ namespace WebApplication3
                                     cS = String.Format("{0:0.00}", creditA[i]);
                                     row["Credit"] = cS;
                                 }
-                                
+                                row["Comment"] = commentA[i];
                                 dt.Rows.Add(row);
                             }
                             else
@@ -491,15 +521,35 @@ namespace WebApplication3
                                     cS = String.Format("{0:0.00}", creditA[i]);
                                     row["Credit"] = cS;
                                 }
+                                row["Comment"] = commentA[i];
                                 dt.Rows.Add(row);
                             }
-
                             
-
-
                         }
 
+                        DataRow row2 = dt.NewRow();
 
+                        row2["Account"] = " ";
+                        row2["Debit"] = "______";
+                        row2["Credit"] = "______";
+                        dt.Rows.Add(row2);
+                        
+
+                        DataRow row3 = dt.NewRow();
+
+                        
+                        row3["Debit"] = "Totals: "+ String.Format("{0:0.00}", dSum);
+                        
+                        dt.Rows.Add(row3);
+
+                        DataRow row4 = dt.NewRow();
+
+                        
+                        
+                        row4["Credit"] = String.Format("{0:0.00}", cSum);
+                        dt.Rows.Add(row4);
+
+                        ViewState["CurrentTable"] = dt;
 
                         GridView1.DataSource = dt;
                         GridView1.DataBind();
@@ -517,7 +567,7 @@ namespace WebApplication3
                         Label1.Visible = true;
                         Label1.ForeColor = System.Drawing.Color.Blue;
                         Label1.Text = "Added";
-
+                        
                     }
                     else
                     {
@@ -546,261 +596,6 @@ namespace WebApplication3
             
         }
 
-        protected void Button4_Click(object sender, EventArgs e)
-        {
-            string ddS = DropDownList2.SelectedValue;
-
-            MySqlConnection conDel = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            conDel.Open();
-            String sDel = "DELETE FROM FROM `chartofaccounts`.`journaltran` WHERE `ID` =  '" + ddS + "'";
-            MySqlCommand cmdDel = new MySqlCommand(sDel, conDel);
-
-            try
-            {
-                cmdDel.ExecuteNonQuery();
-            }
-            catch
-            {
-                Response.Write("Something went wrong with deleting." + sDel);
-            }
-            cmdDel.Dispose();
-            conDel.Close();
-
-            string tbl = "journaltran";
-
-           
-
-            List<int> idL = new List<int>();
-            List<string> accountL = new List<string>();
-            List<double> debitL = new List<double>();
-            List<double> creditL = new List<double>();
-
-            
-
-
-
-
-
-            MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            conRead.Open();
-            String sVal = "SELECT `account` FROM `chartofaccounts`.`journaltran`";
-            MySqlCommand cmdRead = new MySqlCommand(sVal, conRead);
-            try
-            {
-                MySqlDataReader reader = cmdRead.ExecuteReader();
-                while (reader.Read())
-                {
-                    accountL.Add(reader.GetString(0));
-
-
-                }
-
-
-            }
-            catch
-            {
-                Response.Write(sVal);
-            }
-
-
-            cmdRead.Dispose();
-            conRead.Close();
-
-            MySqlConnection conRead2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            conRead2.Open();
-            sVal = "SELECT `debit` FROM `chartofaccounts`.`journaltran`";
-            MySqlCommand cmdRead2 = new MySqlCommand(sVal, conRead2);
-            try
-            {
-
-
-                MySqlDataReader reader2 = cmdRead2.ExecuteReader();
-                while (reader2.Read())
-                {
-                    debitL.Add(Double.Parse(reader2.GetString(0)));
-
-
-                }
-
-
-            }
-            catch
-            {
-                Response.Write(sVal);
-            }
-
-
-            cmdRead2.Dispose();
-            conRead2.Close();
-
-            MySqlConnection conRead3 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            conRead3.Open();
-            sVal = "SELECT `credit` FROM `chartofaccounts`.`journaltran`";
-            MySqlCommand cmdRead3 = new MySqlCommand(sVal, conRead3);
-            try
-            {
-                MySqlDataReader reader3 = cmdRead3.ExecuteReader();
-                while (reader3.Read())
-                {
-                    creditL.Add(Double.Parse(reader3.GetString(0)));
-
-
-                }
-
-
-
-            }
-            catch
-            {
-                Response.Write(sVal);
-            }
-            MySqlConnection conRead4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
-            conRead4.Open();
-            sVal = "SELECT `ID` FROM `chartofaccounts`.`journaltran`";
-            MySqlCommand cmdRead4 = new MySqlCommand(sVal, conRead4);
-            try
-            {
-                MySqlDataReader reader4 = cmdRead4.ExecuteReader();
-                while (reader4.Read())
-                {
-                    idL.Add(Int32.Parse(reader4.GetString(0)));
-
-
-                }
-
-
-
-            }
-            catch
-            {
-                Response.Write(sVal);
-            }
-
-
-            cmdRead4.Dispose();
-            conRead4.Close();
-
-            /*idL.Add((idL.Count) + 1);
-            accountL.Add(DropDownList1.SelectedValue);
-            debitL.Add(Double.Parse(TextBox1.Text));
-            creditL.Add(Double.Parse(TextBox2.Text));*/
-
-
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Account", typeof(string));
-            dt.Columns.Add("Debit", typeof(string));
-            dt.Columns.Add("Credit", typeof(string));
-
-            int[] idA = idL.ToArray();
-            string[] accountA = accountL.ToArray();
-            double[] debitA = debitL.ToArray();
-            double[] creditA = creditL.ToArray();
-
-            double dSum = 0;
-            double cSum = 0;
-
-            for (int i = 0; i <= accountA.Length - 1; i++)
-            {
-                dSum = dSum + debitA[i];
-
-            }
-
-            Label2.Text = "" + dSum;
-
-
-            for (int i = 0; i <= accountA.Length - 1; i++)
-            {
-                cSum = cSum + creditA[i];
-
-            }
-
-            Label3.Text = "" + cSum;
-
-            for (int i = 0; i <= accountA.Length - 1; i++)
-            {
-                string dS = "";
-                string cS = "";
-
-                if (i == 0)
-                {
-                    //This one will add the $
-                    DataRow row = dt.NewRow();
-                    row["ID"] = idA[i];
-                    row["Account"] = accountA[i];
-                    if (debitA[i] == 0)
-                    {
-                        row["Debit"] = "";
-                    }
-                    else
-                    {
-                        dS = "$" + String.Format("{0:0.00}", debitA[i]);
-                        row["Debit"] = dS;
-                    }
-                    if (creditA[i] == 0)
-                    {
-                        row["Credit"] = cS;
-                    }
-                    else
-                    {
-                        cS = String.Format("{0:0.00}", creditA[i]);
-                        row["Credit"] = cS;
-                    }
-
-                    dt.Rows.Add(row);
-                }
-                else
-                {
-                    DataRow row = dt.NewRow();
-                    row["ID"] = idA[i];
-                    row["Account"] = accountA[i];
-                    if (debitA[i] == 0)
-                    {
-                        row["Debit"] = "";
-                    }
-                    else
-                    {
-                        dS = String.Format("{0:0.00}", debitA[i]);
-                        row["Debit"] = dS;
-                    }
-                    if (creditA[i] == 0)
-                    {
-                        row["Credit"] = cS;
-                    }
-                    else
-                    {
-                        cS = String.Format("{0:0.00}", creditA[i]);
-                        row["Credit"] = cS;
-                    }
-                    dt.Rows.Add(row);
-                }
-
-
-
-
-            }
-
-
-
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-
-            DropDownList2.DataSource = dt;
-            DropDownList2.DataTextField = "ID";
-
-
-            DropDownList2.DataBind();
-
-
-            TextBox1.Text = "0";
-            TextBox2.Text = "0";
-
-            Label5.Visible = true;
-            Label5.ForeColor = System.Drawing.Color.Red;
-            Label5.Text = "Row " + ddS + " deleted!";
-
-        }
         public double getDoubleDB(string tbl, string acc, string place)
         {
             double dbVal = 0;
@@ -901,14 +696,12 @@ namespace WebApplication3
             contable.Close();
         }
 
-        public void insertStringDB(string tbl_name, string account, string debit, string credit)
+        public void insertStringDB(string tbl_name, string account, string debit, string credit, string comment)
         {
             MySqlConnection conIN = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conIN.Open();
-
-            
-
-            String coaDB = "INSERT INTO `chartofaccounts`.`"+ tbl_name + "` (`account`,`debit`,`credit`) VALUES('" + account + "','" + debit + "','" + credit + "')";
+                        
+            String coaDB = "INSERT INTO `chartofaccounts`.`"+ tbl_name + "` (`account`,`debit`,`credit`,`comment`) VALUES('" + account + "','" + debit + "','" + credit + "','" + comment + "')";
             MySqlCommand cmdIN = new MySqlCommand(coaDB, conIN);
 
             try
@@ -931,7 +724,7 @@ namespace WebApplication3
 
 
 
-            String coaDB2 = "INSERT INTO `chartofaccounts`.`" + tbl_name + "` (`Title`,`ID`,`Account`,`Debit`,`Credit`) VALUES('" + title + "','" + id + "','" + account + "','" + debit + "','" + credit + "')";
+            String coaDB2 = "INSERT INTO `chartofaccounts`.`" + tbl_name + "` (`Title`,`Status`,`ID`,`Account`,`Debit`,`Credit`) VALUES('" + title + "','TBD','" + id + "','" + account + "','" + debit + "','" + credit + "')";
             MySqlCommand cmdIN2 = new MySqlCommand(coaDB2, conIN2);
 
             try
@@ -979,7 +772,7 @@ namespace WebApplication3
             List<double> debitL = new List<double>();
             List<double> creditL = new List<double>();
 
-            insertStringDB(tbl, DropDownList1.SelectedValue, TextBox1.Text, TextBox2.Text);
+            insertStringDB(tbl, DropDownList1.SelectedValue, TextBox1.Text, TextBox2.Text, TextBox3.Text);
 
             Response.Write(TextBox1.Text);
             Response.Write(TextBox2.Text);
@@ -1115,21 +908,10 @@ namespace WebApplication3
 
 
             }
-
-
-
-
-
-
-
-
+            
             GridView1.DataSource = dt;
             GridView1.DataBind();
-
-
-
-
-
+            
         }
 
 
@@ -1173,8 +955,7 @@ namespace WebApplication3
             List<string> accountL = new List<string>();
             List<double> debitL = new List<double>();
             List<double> creditL = new List<double>();
-
-
+            List<string> commentL = new List<string>();
 
 
 
@@ -1279,23 +1060,42 @@ namespace WebApplication3
             cmdRead4.Dispose();
             conRead4.Close();
 
-            /*idL.Add((idL.Count) + 1);
-            accountL.Add(DropDownList1.SelectedValue);
-            debitL.Add(Double.Parse(TextBox1.Text));
-            creditL.Add(Double.Parse(TextBox2.Text));*/
+            MySqlConnection conRead5 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead5.Open();
+            String sVal5 = "SELECT `comment` FROM `chartofaccounts`.`journaltran`";
+            MySqlCommand cmdRead5 = new MySqlCommand(sVal5, conRead5);
+            try
+            {
+                MySqlDataReader reader5 = cmdRead5.ExecuteReader();
+                while (reader5.Read())
+                {
+
+                    commentL.Add(reader5.GetString(0));
 
 
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal5);
+            }
+
+            
 
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("Account", typeof(string));
             dt.Columns.Add("Debit", typeof(string));
             dt.Columns.Add("Credit", typeof(string));
+            dt.Columns.Add("Comment", typeof(string));
 
             int[] idA = idL.ToArray();
             string[] accountA = accountL.ToArray();
             double[] debitA = debitL.ToArray();
             double[] creditA = creditL.ToArray();
+            string[] commentA = commentL.ToArray();
 
             double dSum = 0;
             double cSum = 0;
@@ -1346,7 +1146,7 @@ namespace WebApplication3
                         cS = String.Format("{0:0.00}", creditA[i]);
                         row["Credit"] = cS;
                     }
-
+                    row["Comment"] = commentA[i];
                     dt.Rows.Add(row);
                 }
                 else
@@ -1372,15 +1172,35 @@ namespace WebApplication3
                         cS = String.Format("{0:0.00}", creditA[i]);
                         row["Credit"] = cS;
                     }
+                    row["Comment"] = commentA[i];
                     dt.Rows.Add(row);
                 }
 
-
-
-
             }
 
+            DataRow row2 = dt.NewRow();
 
+            row2["Account"] = " ";
+            row2["Debit"] = "______";
+            row2["Credit"] = "______";
+            dt.Rows.Add(row2);
+
+
+            DataRow row3 = dt.NewRow();
+
+
+            row3["Debit"] = "Totals: " + String.Format("{0:0.00}", dSum);
+
+            dt.Rows.Add(row3);
+
+            DataRow row4 = dt.NewRow();
+
+
+
+            row4["Credit"] = String.Format("{0:0.00}", cSum);
+            dt.Rows.Add(row4);
+
+            ViewState["CurrentTable"] = dt;
 
             GridView1.DataSource = dt;
             GridView1.DataBind();
@@ -1395,9 +1215,62 @@ namespace WebApplication3
             TextBox1.Text = "0";
             TextBox2.Text = "0";
 
+            
             Label5.Visible = true;
             Label5.ForeColor = System.Drawing.Color.Red;
             Label5.Text = "Row " + ddS + " deleted!";
+        }
+
+        public string hLong(string s)
+        {
+            string str = "";
+            int i = s.Length;
+            if (i == 3)
+            {
+                str = "        ";
+            }
+            if (i == 4)
+            {
+                str = "       ";
+            }
+            if (i == 5)
+            {
+                str = "      ";
+            }
+            if (i == 6)
+            {
+                str = "     ";
+            }
+            if (i == 7)
+            {
+                str = "    ";
+            }
+            if (i == 8)
+            {
+                str = "   ";
+            }
+            if (i == 9)
+            {
+                str = "  ";
+            }
+            if (i == 10)
+            {
+                str = " ";
+            }
+            else
+            {
+                return str;
+            }
+
+
+            return str;
+        }
+        protected void gbGridWithSpaces_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                cell.Text = cell.Text.Replace(" ", "&nbsp;");
+            }
         }
     }
 }

@@ -70,6 +70,13 @@
 </nav>
 
         <br />
+        <br />
+        <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
+        <br />
+        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+        <br />
+
+        <br />
 
         <table class="auto-style1">
             <tr>
@@ -126,12 +133,12 @@
             </tr>
         </table>
         <br />
-        <br />
-        <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CellSpacing="2">
+        <asp:GridView ID="GridView1" runat="server" CellPadding="10" CellSpacing="5" ForeColor="#333333" GridLines="None" EnableSortingAndPagingCallbacks="True" Width="300px" FooterStyle-HorizontalAlign="Center" AutoGenerateColumns="False">
             <AlternatingRowStyle BackColor="White" />
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+            
             <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
             <RowStyle BackColor="#E3EAEB" />
             <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
@@ -140,14 +147,31 @@
             <SortedDescendingCellStyle BackColor="#D4DFE1" />
             <SortedDescendingHeaderStyle BackColor="#15524A" />
 
+            <Columns>
+                <asp:BoundField ReadOnly="True" HeaderText="ID"
+		DataField="ID" SortExpression="ID" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+                
+                <asp:BoundField ReadOnly="True" HeaderText="Account"
+		DataField="Account" SortExpression="Account" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+
+                <asp:BoundField ReadOnly="True" HeaderText="Debit"
+		DataField="Debit" SortExpression="Debit"  ItemStyle-HorizontalAlign="Right"></asp:BoundField>
+                
+                <asp:BoundField ReadOnly="True" HeaderText="Credit"
+		DataField="Credit" SortExpression="Credit" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"></asp:BoundField>
+                
+                <asp:BoundField ReadOnly="True" HeaderText="Comment"
+		DataField="Comment" SortExpression="Comment" HeaderStyle-HorizontalAlign="Right"></asp:BoundField>
+                
+            </Columns>
+
+
+            
         </asp:GridView>
+
         <table class="nav-justified">
             <tr>
-                <td class="auto-style7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <br />
-                    <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:Label ID="Label7" runat="server" Text="Total:" Visible="False"></asp:Label>
+                <td class="auto-style7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label7" runat="server" Text="Total:" Visible="False"></asp:Label>
 &nbsp;
         <asp:Label ID="Label2" runat="server" Text="0.00" Visible="False"></asp:Label>
                 </td>
@@ -161,17 +185,9 @@
             </tr>
         </table>
         <br />
-&nbsp;&nbsp;&nbsp;
-        <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <br />
-        <br />
         <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
         <asp:Button ID="Button5" runat="server" Text="Browse to Upload File" />
         <br />
-        <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
-        <br />
-        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -179,7 +195,6 @@
         <asp:Label ID="Label4" runat="server" Text="Label" Visible="False"></asp:Label>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <br />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button2" runat="server" OnClick="Button2_Click" Text="Return to Home" />
         <br />

@@ -87,6 +87,11 @@ namespace WebApplication3
         {
             Response.Redirect("InspectingTrans.aspx");
         }
+
+        protected void Button12_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DisplayCOA.aspx");
+        }
     }
 
 }
