@@ -136,6 +136,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Second Donnovan.aspx" />
     <Content Include="Testing.aspx" />
+    <Content Include="TrialB.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +203,13 @@
     </Compile>
     <Compile Include="Testing.aspx.designer.cs">
       <DependentUpon>Testing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrialB.aspx.cs">
+      <DependentUpon>TrialB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrialB.aspx.designer.cs">
+      <DependentUpon>TrialB.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>

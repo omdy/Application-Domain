@@ -69,7 +69,7 @@
             <br />
             <asp:Button ID="Button11" runat="server" OnClick="Button11_Click" Text="Posting" />
             <br />
-            <asp:Button ID="Button13" runat="server" Text="Trial Balance" />
+            <asp:Button ID="Button13" runat="server" Text="Trial Balance" OnClick="Button13_Click" />
             <br />
             <asp:Button ID="Button14" runat="server" Text="Ledger" />
         <br />

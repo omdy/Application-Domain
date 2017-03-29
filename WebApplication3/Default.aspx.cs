@@ -92,6 +92,11 @@ namespace WebApplication3
         {
             Response.Redirect("DisplayCOA.aspx");
         }
+
+        protected void Button13_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TrialB.aspx");
+        }
     }
 
 }
