@@ -16,7 +16,7 @@
     <div class="auto-style1">
     
         <br />
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Show the Trial Balance" />
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Return" />
         <br />
         <br />
         <asp:GridView ID="GridView1" runat="server" CellPadding="10" CellSpacing="5" ForeColor="#333333" GridLines="None" EnableSortingAndPagingCallbacks="True" Width="300px" FooterStyle-HorizontalAlign="Center" AutoGenerateColumns="False">

@@ -13,7 +13,7 @@ namespace WebApplication3
     {
 
         String user = "Andy Mecke";
-        String date = "03/13/2017";
+        String date = "03/29/2017";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,15 +34,16 @@ namespace WebApplication3
             string accName = TextBox2.Text;
             string accType = DropDownList1.Text;
             string accSide = DropDownList2.Text;
-            string accCode = TextBox6.Text;
+            string accSub = TextBox6.Text;
             string accOrder = TextBox7.Text;
             string accUser = user;
             string accDate = date;
             string accActive = DropDownList3.Text;
             string accComment = TextBox11.Text;
+            string ib = TextBox12.Text;
 
-            bool insertWork;
-            insertAcc(user, date, accName, accOrder, accCode, accType, accSide, accSide, accComment);
+            
+            insertAcc(user, date, accName, accOrder, accSub, accType, accSide, accActive, accComment);
 
 
 
@@ -51,7 +52,7 @@ namespace WebApplication3
             String evDB = "INSERT INTO chartofaccounts.eventlog (Name, Date, Type, Event)VALUES('" + user + "','" + date + "','" + dbType + "','" + dbEvent + "')";
             MySqlCommand cmd2 = new MySqlCommand(evDB, con);
 
-            String abDB = "INSERT INTO `chartofaccounts`.`accountbalances` (`Account`, `Actual Balance`, `Pending+Value`, `Pending-Value`, `PendingCombined`, `Liquidity Order`) VALUES('" + TextBox2.Text + "','0','0','0', '0', '" + TextBox7.Text + "')";
+            String abDB = "INSERT INTO `chartofaccounts`.`accountbalances` (`Account`, `Actual Balance`, `Pending+Value`, `Pending-Value`, `PendingCombined`, `Liquidity Order`) VALUES('" + TextBox2.Text + "','" + Double.Parse(ib) + "','0','0', '0', '" + TextBox7.Text + "')";
             MySqlCommand cmd3 = new MySqlCommand(abDB, con);
 
             try
@@ -83,12 +84,12 @@ namespace WebApplication3
         {
             Response.Redirect("~/Default.aspx");
         }
-        public Boolean insertAcc(string user, string date, string accName, string order, string code, string type, string side, string active, string comment)
+        public Boolean insertAcc(string user, string date, string accName, string order, string sub, string type, string side, string active, string comment)
         {
             MySqlConnection conIA = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conIA.Open();
 
-            String coaDB = "INSERT INTO chartofaccounts.chartofaccounts VALUES('" + accName + "','" + type + "','" + side + "','" + code + "','" + order + "','" + user + "','" + date + "','" + active + "','" + comment + "')";
+            String coaDB = "INSERT INTO chartofaccounts.chartofaccounts VALUES('" + accName + "','" + type + "','" + side + "','" + sub + "','" + order + "','" + user + "','" + date + "','" + active + "','" + comment + "')";
             MySqlCommand cmdIA = new MySqlCommand(coaDB, conIA);
 
             try

@@ -71,7 +71,7 @@
             <br />
             <asp:Button ID="Button13" runat="server" Text="Trial Balance" OnClick="Button13_Click" />
             <br />
-            <asp:Button ID="Button14" runat="server" Text="Ledger" />
+            <asp:Button ID="Button14" runat="server" Text="Ledger" Visible="False" />
         <br />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button9" runat="server" OnClick="Button4_Click" Text="Event Log" />

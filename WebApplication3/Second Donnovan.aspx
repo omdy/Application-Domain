@@ -133,7 +133,7 @@
                 <td class="auto-style2">
                     &nbsp;</td>
                 <td class="auto-style7">
-                    <asp:Label ID="Label5" runat="server" Text="Account Code"></asp:Label>
+                    <asp:Label ID="Label5" runat="server" Text="Sub Type"></asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
@@ -188,9 +188,12 @@
                     &nbsp;</td>
                 <td class="auto-style7">
                     <asp:Label ID="Label10" runat="server" Text="Comment"></asp:Label>
-                </td>
+                    <br />
+                    Initial Balance</td>
                 <td>
                     <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:TextBox ID="TextBox12" runat="server"></asp:TextBox>
                 </td>
             </tr>
             <tr>
