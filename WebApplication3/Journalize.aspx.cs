@@ -1134,6 +1134,7 @@ namespace WebApplication3
                     }
                     else
                     {
+
                         dS = "$" + String.Format("{0:0.00}", debitA[i]);
                         row["Debit"] = dS;
                     }
@@ -1271,6 +1272,11 @@ namespace WebApplication3
             {
                 cell.Text = cell.Text.Replace(" ", "&nbsp;");
             }
+        }
+
+        protected void TextBox5_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

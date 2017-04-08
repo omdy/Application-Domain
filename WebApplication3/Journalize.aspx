@@ -73,7 +73,7 @@
         <br />
         <asp:Label ID="Label6" runat="server" Text="Title"></asp:Label>
         <br />
-        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBox5" runat="server" OnTextChanged="TextBox5_TextChanged"></asp:TextBox>
         <br />
 
         <br />

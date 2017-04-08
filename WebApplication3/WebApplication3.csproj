@@ -107,6 +107,7 @@
     <Content Include="Inspect.aspx" />
     <Content Include="InspectingTrans.aspx" />
     <Content Include="Journalize.aspx" />
+    <Content Include="Ledger.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -188,6 +189,13 @@
     </Compile>
     <Compile Include="Journalize.aspx.designer.cs">
       <DependentUpon>Journalize.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ledger.aspx.cs">
+      <DependentUpon>Ledger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ledger.aspx.designer.cs">
+      <DependentUpon>Ledger.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Second Donnovan.aspx.cs">

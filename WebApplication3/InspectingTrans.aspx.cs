@@ -660,14 +660,14 @@ namespace WebApplication3
                             {
                                 debitAdd[accCount] = debitAdd[accCount] + debitA[j];
                                 creditAdd[accCount] = creditAdd[accCount] + creditA[j];
-                            }
-                        }
+                            }//if
+                        }//for
                         accCount++;
 
-                    }
+                    }//if
 
 
-                }
+                }//for loop
 
                 
 

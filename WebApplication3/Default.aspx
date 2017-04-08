@@ -59,10 +59,6 @@
   </div><!-- /.container-fluid -->
 </nav>
         <div style="text-align: center;">
-            <asp:Button ID="Button12" runat="server" OnClick="Button12_Click" Text="View Accounts" />
-        <br />
-        <br />
-        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button2_Click" Text="Add Account" />
         <br />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button8" runat="server" Text="Journalize Transaction" OnClick="Button3_Click" />
@@ -71,8 +67,11 @@
             <br />
             <asp:Button ID="Button13" runat="server" Text="Trial Balance" OnClick="Button13_Click" />
             <br />
-            <asp:Button ID="Button14" runat="server" Text="Ledger" Visible="False" />
+            <asp:Button ID="Button14" runat="server" Text="Ledger" OnClick="Button14_Click" />
+            <br />
+        <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button1" runat="server" OnClick="Button2_Click" Text="Add Account" />
         <br />
+            <asp:Button ID="Button12" runat="server" OnClick="Button12_Click" Text="View Accounts" />
         <br />
         <asp:Button style="background-color:lightgreen" class="btn btn-default" ID="Button9" runat="server" OnClick="Button4_Click" Text="Event Log" />
         <br />
