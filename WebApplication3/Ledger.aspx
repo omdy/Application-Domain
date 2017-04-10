@@ -63,9 +63,6 @@
                 <asp:BoundField ReadOnly="True" HeaderText="Title"
 		DataField="Title" SortExpression="Title" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                 
-                <asp:BoundField ReadOnly="True" HeaderText="Status"
-		DataField="Status" SortExpression="Status" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-                
                 <asp:BoundField ReadOnly="True" HeaderText="Debit"
 		DataField="Debit" SortExpression="Debit"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"></asp:BoundField>
                 

@@ -45,9 +45,21 @@ namespace WebApplication3
         //Denial
         protected void Button3_Click(object sender, EventArgs e)
         {
+            TextBox1.Visible = true;
+            Button5.Visible = true;
+            Button3.Visible = false;
+        }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            string t = TextBox1.Text;
             string s;
             s = getStringDB("tableplaceholders", "current table", "Value", "Type");
-            updateStatusDenyDB("posting", "Status", true, s);
+            updateStatusDenyDB("posting", "Status", true, s, t);
+
+            TextBox1.Visible = false;
+            Button5.Visible = false;
+            Button3.Visible = true;
         }
 
 
@@ -317,7 +329,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                            dS = "$" + String.Format("{0:n}", debitA[i]);
                             row["Debit"] = dS;
                         }
                         if (creditA[i] == 0)
@@ -326,7 +338,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            cS = String.Format("{0:0.00}", creditA[i]);
+                            cS = String.Format("{0:n}", creditA[i]);
                             row["Credit"] = cS;
                         }
 
@@ -345,7 +357,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                            dS = "$" + String.Format("{0:n}", debitA[i]);
                             row["Debit"] = dS;
                         }
                         if (creditA[i] == 0)
@@ -354,7 +366,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            cS = String.Format("{0:0.00}", creditA[i]);
+                            cS = String.Format("{0:n}", creditA[i]);
                             row["Credit"] = cS;
                         }
 
@@ -376,7 +388,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            dS = String.Format("{0:0.00}", debitA[i]);
+                            dS = String.Format("{0:n}", debitA[i]);
                             row["Debit"] = dS;
                         }
                         if (creditA[i] == 0)
@@ -385,7 +397,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            cS = String.Format("{0:0.00}", creditA[i]);
+                            cS = String.Format("{0:n}", creditA[i]);
                             row["Credit"] = cS;
                         }
 
@@ -404,7 +416,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            dS = String.Format("{0:0.00}", debitA[i]);
+                            dS = String.Format("{0:n}", debitA[i]);
                             row["Debit"] = dS;
                         }
                         if (creditA[i] == 0)
@@ -413,7 +425,7 @@ namespace WebApplication3
                         }
                         else
                         {
-                            cS = String.Format("{0:0.00}", creditA[i]);
+                            cS = String.Format("{0:n}", creditA[i]);
                             row["Credit"] = cS;
                         }
 
@@ -467,7 +479,7 @@ namespace WebApplication3
             con.Close();
         }
 
-        public void updateStatusDenyDB(string tbl, string column, bool master, string title)
+        public void updateStatusDenyDB(string tbl, string column, bool master, string title, string reason)
         {
             string check = getStringDB(tbl, title, "Status", "Title");
 
@@ -484,7 +496,7 @@ namespace WebApplication3
                 MySqlConnection conUp = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
                 conUp.Open();
 
-                String coaDB = "UPDATE `chartofaccounts`.`" + tbl + "` SET `" + column + "` = 'denied' WHERE `Title` = '" + title + "'";
+                String coaDB = "UPDATE `chartofaccounts`.`" + tbl + "` SET `" + column + "` = 'denied',`Reason` = '" + reason +"' WHERE `Title` = '" + title + "'";
                 MySqlCommand cmdUp = new MySqlCommand(coaDB, conUp);
 
                 try
@@ -791,5 +803,7 @@ namespace WebApplication3
         {
 
         }
+
+        
     }
 }

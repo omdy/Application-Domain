@@ -185,7 +185,7 @@ namespace WebApplication3
                     for (int i = 0; i <= accountA.Length - 1; i++)
                     {
                         string tbS = TextBox5.Text;
-
+                        string d = TextBox6.Text;
 
                         insertStringDB2("posting", tbS, idA[i], accountA[i], String.Format("{0:0.00}", debitA[i]), String.Format("{0:0.00}", creditA[i]));
 
@@ -483,7 +483,7 @@ namespace WebApplication3
                                 }
                                 else
                                 {
-                                    dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                                    dS = "$" + String.Format("{0:n}", debitA[i]);
                                     row["Debit"] = dS;
                                 }
                                 if (creditA[i] == 0)
@@ -492,7 +492,7 @@ namespace WebApplication3
                                 }
                                 else
                                 {
-                                    cS = String.Format("{0:0.00}", creditA[i]);
+                                    cS = String.Format("{0:n}", creditA[i]);
                                     row["Credit"] = cS;
                                 }
                                 row["Comment"] = commentA[i];
@@ -509,7 +509,7 @@ namespace WebApplication3
                                 }
                                 else
                                 {
-                                    dS = String.Format("{0:0.00}", debitA[i]);
+                                    dS = String.Format("{0:n}", debitA[i]);
                                     row["Debit"] = dS;
                                 }
                                 if (creditA[i] == 0)
@@ -518,7 +518,7 @@ namespace WebApplication3
                                 }
                                 else
                                 {
-                                    cS = String.Format("{0:0.00}", creditA[i]);
+                                    cS = String.Format("{0:n}", creditA[i]);
                                     row["Credit"] = cS;
                                 }
                                 row["Comment"] = commentA[i];
@@ -538,7 +538,7 @@ namespace WebApplication3
                         DataRow row3 = dt.NewRow();
 
                         
-                        row3["Debit"] = "Totals: "+ String.Format("{0:0.00}", dSum);
+                        row3["Debit"] = "Totals: "+ String.Format("{0:n}", dSum);
                         
                         dt.Rows.Add(row3);
 
@@ -546,7 +546,7 @@ namespace WebApplication3
 
                         
                         
-                        row4["Credit"] = String.Format("{0:0.00}", cSum);
+                        row4["Credit"] = String.Format("{0:n}", cSum);
                         dt.Rows.Add(row4);
 
                         ViewState["CurrentTable"] = dt;
@@ -1135,7 +1135,7 @@ namespace WebApplication3
                     else
                     {
 
-                        dS = "$" + String.Format("{0:0.00}", debitA[i]);
+                        dS = "$" + String.Format("{0:n}", debitA[i]);
                         row["Debit"] = dS;
                     }
                     if (creditA[i] == 0)
@@ -1144,7 +1144,7 @@ namespace WebApplication3
                     }
                     else
                     {
-                        cS = String.Format("{0:0.00}", creditA[i]);
+                        cS = String.Format("{0:n}", creditA[i]);
                         row["Credit"] = cS;
                     }
                     row["Comment"] = commentA[i];
@@ -1161,7 +1161,7 @@ namespace WebApplication3
                     }
                     else
                     {
-                        dS = String.Format("{0:0.00}", debitA[i]);
+                        dS = String.Format("{0:n}", debitA[i]);
                         row["Debit"] = dS;
                     }
                     if (creditA[i] == 0)
@@ -1170,7 +1170,7 @@ namespace WebApplication3
                     }
                     else
                     {
-                        cS = String.Format("{0:0.00}", creditA[i]);
+                        cS = String.Format("{0:n}", creditA[i]);
                         row["Credit"] = cS;
                     }
                     row["Comment"] = commentA[i];
@@ -1190,7 +1190,7 @@ namespace WebApplication3
             DataRow row3 = dt.NewRow();
 
 
-            row3["Debit"] = "Totals: " + String.Format("{0:0.00}", dSum);
+            row3["Debit"] = "Totals: " + String.Format("{0:n}", dSum);
 
             dt.Rows.Add(row3);
 
@@ -1198,7 +1198,7 @@ namespace WebApplication3
 
 
 
-            row4["Credit"] = String.Format("{0:0.00}", cSum);
+            row4["Credit"] = String.Format("{0:n}", cSum);
             dt.Rows.Add(row4);
 
             ViewState["CurrentTable"] = dt;

@@ -34,10 +34,10 @@ namespace WebApplication3
             List<string> accountL = new List<string>();
             List<double> debitL = new List<double>();
             List<double> creditL = new List<double>();
-            Response.Write("It got here top.");
+            
             MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conRead.Open();
-            String sVal = "SELECT `Title` FROM `chartofaccounts`.`posting`";
+            String sVal = "SELECT `Title` FROM `chartofaccounts`.`posting` WHERE `Status` = 'posted'";
             MySqlCommand cmdRead = new MySqlCommand(sVal, conRead);
             try
             {
@@ -61,7 +61,7 @@ namespace WebApplication3
 
             MySqlConnection conRead2 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conRead2.Open();
-            String sVal2 = "SELECT `Status` FROM `chartofaccounts`.`posting`";
+            String sVal2 = "SELECT `Status` FROM `chartofaccounts`.`posting` WHERE `Status` = 'posted'";
             MySqlCommand cmdRead2 = new MySqlCommand(sVal2, conRead2);
             try
             {
@@ -85,7 +85,7 @@ namespace WebApplication3
 
             MySqlConnection conRead3 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conRead3.Open();
-            String sVal3 = "SELECT `ID` FROM `chartofaccounts`.`posting`";
+            String sVal3 = "SELECT `ID` FROM `chartofaccounts`.`posting` WHERE `Status` = 'posted'";
             MySqlCommand cmdRead3 = new MySqlCommand(sVal3, conRead3);
             try
             {
@@ -111,7 +111,7 @@ namespace WebApplication3
 
             MySqlConnection conRead4 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conRead4.Open();
-            String sVal4 = "SELECT `Account` FROM `chartofaccounts`.`posting`";
+            String sVal4 = "SELECT `Account` FROM `chartofaccounts`.`posting` WHERE `Status` = 'posted'";
             MySqlCommand cmdRead4 = new MySqlCommand(sVal4, conRead4);
             try
             {
@@ -137,7 +137,7 @@ namespace WebApplication3
 
             MySqlConnection conRead5 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conRead5.Open();
-            String sVal5 = "SELECT `Debit` FROM `chartofaccounts`.`posting`";
+            String sVal5 = "SELECT `Debit` FROM `chartofaccounts`.`posting` WHERE `Status` = 'posted'";
             MySqlCommand cmdRead5 = new MySqlCommand(sVal5, conRead5);
             try
             {
@@ -163,7 +163,7 @@ namespace WebApplication3
 
             MySqlConnection conRead6 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conRead6.Open();
-            String sVal6 = "SELECT `Credit` FROM `chartofaccounts`.`posting`";
+            String sVal6 = "SELECT `Credit` FROM `chartofaccounts`.`posting` WHERE `Status` = 'posted'";
             MySqlCommand cmdRead6 = new MySqlCommand(sVal6, conRead6);
             try
             {
@@ -196,7 +196,7 @@ namespace WebApplication3
 
             DataTable dt = new DataTable();
             dt.Columns.Add("Title", typeof(string));
-            dt.Columns.Add("Status", typeof(string));
+            
             
             dt.Columns.Add("Account", typeof(string));
             dt.Columns.Add("Debit", typeof(string));

@@ -26,7 +26,7 @@
         <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Return" />
         <br />
         <br />
-        <asp:GridView ID="GridView2" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="GridView2" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False">
             
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -61,13 +61,19 @@
                 <asp:BoundField ReadOnly="True" HeaderText="Comment"
 		DataField="Comment" SortExpression="Comment" HeaderStyle-HorizontalAlign="Right"></asp:BoundField>
                 
+                <asp:BoundField ReadOnly="True" HeaderText="Reason"
+		DataField="Reason" SortExpression="Reason" HeaderStyle-HorizontalAlign="Right"></asp:BoundField>
+                
+
             </Columns>
         </asp:GridView>
         <br />
         <br />
-        <asp:Button ID="Button2" runat="server" Text="Accept" OnClick="Button2_Click" />
+        <asp:Button ID="Button2" runat="server" Text="Post" OnClick="Button2_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button3" runat="server" Text="Decline" OnClick="Button3_Click" />
+        <asp:Button ID="Button3" runat="server" Text="Reject" OnClick="Button3_Click" />
+        <asp:TextBox ID="TextBox1" runat="server" Visible="False">Add a reason</asp:TextBox>
+        <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="Reject with Reason" Visible="False" />
         <br />
         <br />
         <br />
