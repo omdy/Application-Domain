@@ -34,7 +34,11 @@ namespace WebApplication3
             List<string> accountL = new List<string>();
             List<double> debitL = new List<double>();
             List<double> creditL = new List<double>();
-            
+            List<string> typeL = new List<string>();
+            List<double> balanceL = new List<double>();
+            List<string> accountL2 = new List<string>();
+
+
             MySqlConnection conRead = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
             conRead.Open();
             String sVal = "SELECT `Title` FROM `chartofaccounts`.`posting` WHERE `Status` = 'posted'";
@@ -187,12 +191,92 @@ namespace WebApplication3
             cmdRead6.Dispose();
             conRead6.Close();
 
+            MySqlConnection conRead7 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead7.Open();
+            string sVal7 = "SELECT `side` FROM `chartofaccounts`.`chartofaccounts` ORDER BY `Liquidity Order`";
+            MySqlCommand cmdRead7 = new MySqlCommand(sVal7, conRead7);
+            try
+            {
+                MySqlDataReader reader7 = cmdRead7.ExecuteReader();
+                while (reader7.Read())
+                {
+                    typeL.Add(reader7.GetString(0));
+
+
+                }
+
+
+
+            }
+            catch
+            {
+                Response.Write(sVal7);
+            }
+
+            cmdRead7.Dispose();
+            conRead7.Close();
+
+            MySqlConnection conRead8 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead2.Open();
+            string sVal8 = "SELECT `Actual Balance` FROM `chartofaccounts`.`accountbalances` ORDER BY `Liquidity Order`";
+            MySqlCommand cmdRead8 = new MySqlCommand(sVal8, conRead2);
+            try
+            {
+
+
+                MySqlDataReader reader8 = cmdRead8.ExecuteReader();
+                while (reader8.Read())
+                {
+                    balanceL.Add(Double.Parse(reader8.GetString(0)));
+
+
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal8);
+            }
+
+
+            cmdRead8.Dispose();
+            conRead8.Close();
+
+            MySqlConnection conRead9 = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
+            conRead9.Open();
+            String sVal9 = "SELECT `Account` FROM `chartofaccounts`.`accountbalances` ORDER BY `Liquidity Order`";
+            MySqlCommand cmdRead9 = new MySqlCommand(sVal9, conRead9);
+            try
+            {
+                MySqlDataReader reader9 = cmdRead9.ExecuteReader();
+                while (reader9.Read())
+                {
+                    accountL2.Add(reader9.GetString(0));
+
+
+                }
+
+
+            }
+            catch
+            {
+                Response.Write(sVal9);
+            }
+
+
+            cmdRead9.Dispose();
+            conRead9.Close();
+
             string[] titleA = titleL.ToArray();
             string[] statusA = statusL.ToArray();
             int[] idA = idL.ToArray();
             string[] accountA = accountL.ToArray();
             double[] debitA = debitL.ToArray();
             double[] creditA = creditL.ToArray();
+            string[] typeA = typeL.ToArray();
+            double[] balanceA = balanceL.ToArray();
+            string[] accountA2 = accountL2.ToArray();
 
             DataTable dt = new DataTable();
             dt.Columns.Add("Title", typeof(string));
@@ -210,6 +294,9 @@ namespace WebApplication3
 
             double[] debitAdd = new double[accountA.Length];
             double[] creditAdd = new double[accountA.Length];
+
+
+            
 
             int accCount = 0;
             for (int i = 0; i <= accountA.Length - 1; i++)
@@ -264,12 +351,38 @@ namespace WebApplication3
 
 
                                 dt.Rows.Add(row2);
-                                
+
+                             
+                                    
 
                             }//if
                         }//for
                         //accCount++;
+                        DataRow row3 = dt.NewRow();
 
+                        dt.Rows.Add(row3);
+
+                        DataRow rowB = dt.NewRow();
+                        rowB["Title"] = "Total: ";
+                        for (int q = 0; q <= accountA2.Length - 1; q++)
+                        {
+                            if (accountA2[q] == accountAdd[accCount])
+                            {
+                                
+                                if (typeA[q] == "Left")
+                                {
+                                    
+                                    rowB["Debit"] = String.Format("{0:n}", balanceA[q]);
+                                }
+                                else
+                                {
+                                    
+                                    rowB["Credit"] = String.Format("{0:n}", balanceA[q]);
+                                }
+                            }
+                        }
+
+                        dt.Rows.Add(rowB);
 
                     }//if
                     else
@@ -306,13 +419,44 @@ namespace WebApplication3
                                 
 
                             }
+                            
                             //accCount++;
+
                         }
+
+                        DataRow row3 = dt.NewRow();
+                        
+                        dt.Rows.Add(row3);
+
+                        DataRow rowB = dt.NewRow();
+                        rowB["Title"] = "Total: ";
+                        for (int q = 0; q <= accountA2.Length - 1; q++)
+                        {
+                            if (accountA2[q] == accountAdd[accCount])
+                            {
+
+                                if (typeA[q] == "Left")
+                                {
+
+                                    rowB["Debit"] = String.Format("{0:n}", balanceA[q]);
+                                }
+                                else
+                                {
+
+                                    rowB["Credit"] = String.Format("{0:n}", balanceA[q]);
+                                }
+                            }
+                        }
+
+                        dt.Rows.Add(rowB);
                     }
-                    DataRow row3 = dt.NewRow();
-                    dt.Rows.Add(row3);
+
+                    
                     DataRow row4 = dt.NewRow();
                     dt.Rows.Add(row4);
+                    
+
+
                     accCount++; 
                 }//if
 
@@ -330,8 +474,7 @@ namespace WebApplication3
 
             GridView2.DataSource = dt;
             GridView2.DataBind();
-
-            Response.Write("It got here bottom.");
+            
 
 
 
@@ -353,7 +496,7 @@ namespace WebApplication3
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            DataBind();
+            Response.Redirect("Default.aspx");
         }
     }
 }

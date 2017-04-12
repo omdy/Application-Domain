@@ -41,6 +41,10 @@ namespace WebApplication3
             string s;
             s = getStringDB("tableplaceholders", "current table", "Value", "Type");
             updateStatusDB("posting", "Status", true, s);
+
+            string ddS = DropDownList1.SelectedValue;
+            BindData2(ddS);
+            updateTableDB(ddS);
         }
         //Denial
         protected void Button3_Click(object sender, EventArgs e)
@@ -60,6 +64,10 @@ namespace WebApplication3
             TextBox1.Visible = false;
             Button5.Visible = false;
             Button3.Visible = true;
+
+            string ddS = DropDownList1.SelectedValue;
+            BindData2(ddS);
+            updateTableDB(ddS);
         }
 
 
