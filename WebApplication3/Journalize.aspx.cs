@@ -476,7 +476,7 @@ namespace WebApplication3
                                 //This one will add the $
                                 DataRow row = dt.NewRow();
                                 row["ID"] = idA[i];
-                                row["Account"] = accountA[i];
+                                row["Account"] = "                       " + accountA[i];
                                 if (debitA[i] == 0)
                                 {
                                     row["Debit"] = "";

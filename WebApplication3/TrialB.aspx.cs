@@ -220,9 +220,10 @@ namespace WebApplication3
 
 
                 DataRow row3 = dt.NewRow();
+                
+                row3["Account"] = "Totals: ";
 
-
-                row3["Debit"] = "Totals: " + String.Format("{0:n}", dSum);
+                row3["Debit"] = String.Format("{0:n}", dSum);
 
                 dt.Rows.Add(row3);
 
@@ -460,8 +461,9 @@ namespace WebApplication3
 
             DataRow row3 = dt.NewRow();
 
+            row3["Account"] = "Totals: ";
 
-            row3["Debit"] = "Totals: " + String.Format("{0:n}", dSum);
+            row3["Debit"] = String.Format("{0:n}", dSum);
 
             dt.Rows.Add(row3);
 
