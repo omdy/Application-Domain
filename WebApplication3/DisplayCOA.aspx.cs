@@ -15,6 +15,42 @@ namespace WebApplication3
 
         }
 
+
+        protected void Button20_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Journalize.aspx");
+        }
+
+        protected void Button21_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("InspectingTrans.aspx");
+        }
+
+        protected void Button22_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TrialB.aspx");
+        }
+
+        protected void Button23_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ledger.aspx");
+        }
+
+        protected void Button24_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Second Donnovan.aspx");
+        }
+
+        protected void Button25_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DisplayCOA.aspx");
+        }
+
+        protected void Button26_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Event Log.aspx");
+        }
+
         protected void Button1_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");

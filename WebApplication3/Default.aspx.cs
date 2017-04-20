@@ -17,6 +17,7 @@ namespace WebApplication3
             //sex knights 2 is best anime
             //dal's turn
         }
+        /*
         public void BindData()
         {
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;persistsecurityinfo=True;database=chartofaccounts;password=andy");
@@ -33,23 +34,44 @@ namespace WebApplication3
             cmd.Dispose();
             con.Close();
         }
-
+        */
         protected void Button1_Click(object sender, EventArgs e)
         {
-            BindData();
+            //BindData();
 
         }//poppoop
 
-        protected void Button2_Click(object sender, EventArgs e)
+        protected void Button20_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Journalize.aspx");
+        }
+
+        protected void Button21_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("InspectingTrans.aspx");
+        }
+
+        protected void Button22_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TrialB.aspx");
+        }
+
+        protected void Button23_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ledger.aspx");
+        }
+
+        protected void Button24_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Second Donnovan.aspx");
         }
 
-        protected void Button3_Click(object sender, EventArgs e)
+        protected void Button25_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Journalize.aspx");
+            Response.Redirect("DisplayCOA.aspx");
         }
-        protected void Button4_Click(object sender, EventArgs e)
+
+        protected void Button26_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Event Log.aspx");
         }
@@ -69,8 +91,8 @@ namespace WebApplication3
             DataSet ds = new DataSet();
             adp.Fill(ds);
 
-            GridView2.DataSource = ds;
-            GridView2.DataBind();
+            //GridView2.DataSource = ds;
+            //GridView2.DataBind();
 
             cmd.Dispose();
             con.Close();
@@ -83,25 +105,16 @@ namespace WebApplication3
 
         
 
-        protected void Button11_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("InspectingTrans.aspx");
-        }
+        
 
         protected void Button12_Click(object sender, EventArgs e)
         {
             Response.Redirect("DisplayCOA.aspx");
         }
 
-        protected void Button13_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("TrialB.aspx");
-        }
+        
 
-        protected void Button14_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Ledger.aspx");
-        }
+        
     }
 
 }
